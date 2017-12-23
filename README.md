@@ -1,7 +1,5 @@
 # fgctech
 
---
-
 ### Objectives
 
 - Make it easy to archive and find tech

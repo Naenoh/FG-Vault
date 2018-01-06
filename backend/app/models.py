@@ -1,5 +1,7 @@
 # from sqlalchemy import Column, Integer, String, ForeignKey
 # from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative import declarative_base
+
 # from .database import Base
 from app import db
 
@@ -10,12 +12,19 @@ relationship = db.relationship
 ForeignKey = db.ForeignKey
 
 
+Base = declarative_base()
+# We will need this for querying
+Base.query = db.session.query_property()
+
+
 class Post(db.Model):
     __tablename__ = 'posts'
     id = Column(Integer, primary_key=True)
     title = Column(String(255))
     game_id = Column(Integer, ForeignKey('games.id'))
     game = relationship('Game', backref='posts')
+    char_id = Column(Integer, ForeignKey('chars.id'))
+    char = relationship('Char', backref='posts')
 
     def __repr__(self):
         return '<Post %r>' % self.title

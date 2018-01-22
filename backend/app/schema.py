@@ -1,7 +1,7 @@
 import graphene
-from graphene import relay
-from graphene_sqlalchemy import SQLAlchemyObjectType, SQLAlchemyConnectionField
-from graphql_relay import from_global_id
+import sqlalchemy
+from graphene_sqlalchemy import SQLAlchemyObjectType
+from sqlalchemy import text
 
 from .models import Game as GameModel, Post as PostModel, Link as LinkModel, Char as CharModel, db
 
@@ -9,41 +9,21 @@ from .models import Game as GameModel, Post as PostModel, Link as LinkModel, Cha
 class Game(SQLAlchemyObjectType):
     class Meta:
         model = GameModel
-        interfaces = (relay.Node,)
-    dbid = graphene.Int()
-
-    def resolve_dbid(self,info):
-        return self.id
 
 
 class Post(SQLAlchemyObjectType):
     class Meta:
         model = PostModel
-        interfaces = (relay.Node,)
-    dbid = graphene.Int()
-
-    def resolve_dbid(self,info):
-        return self.id
 
 
 class Link(SQLAlchemyObjectType):
     class Meta:
         model = LinkModel
-        interfaces = (relay.Node,)
-    dbid = graphene.Int()
-
-    def resolve_dbid(self,info):
-        return self.id
 
 
 class Char(SQLAlchemyObjectType):
     class Meta:
         model = CharModel
-        interfaces = (relay.Node,)
-    dbid = graphene.Int()
-
-    def resolve_dbid(self,info):
-        return self.id
 
 
 class CreatePost(graphene.Mutation):
@@ -68,24 +48,72 @@ class CreatePost(graphene.Mutation):
 class CreateGame(graphene.Mutation):
     class Arguments:
         name = graphene.String()
+
     ok = graphene.Boolean()
     game = graphene.Field(Game)
+    error = graphene.String()
 
     def mutate(self, info, name):
-        newgame = GameModel(name=name)
-        db.session.add(newgame)
-        db.session.commit(newgame)
+        try:
+            newgame = GameModel(name=name)
+            db.session.add(newgame)
+            db.session.commit()
+            return CreateGame(game=newgame, ok=True)
+        except sqlalchemy.exc.IntegrityError:
+            return CreateGame(ok=False, error="erreur")
+
+class DeleteGame(graphene.Mutation):
+    class Arguments:
+        game_id = graphene.Int()
+
+    ok = graphene.Boolean()
+    error = graphene.String()
+
+    def mutate(self, info, game_id):
+        try:
+            db.session.delete(GameModel.query.get(game_id))
+            db.session.commit()
+            return CreateGame(ok=True)
+        except sqlalchemy.exc.IntegrityError:
+            return CreateGame(ok=False, error="erreur")
+
+
+class AllPosts(graphene.ObjectType):
+    posts = graphene.List(Post)
 
 
 class Mutations(graphene.ObjectType):
     create_post = CreatePost.Field()
     create_game = CreateGame.Field()
+    delete_game = DeleteGame.Field()
+
+
+class FilteredPosts(graphene.ObjectType):
+    posts = graphene.List(Post)
+    size = graphene.Int()
 
 
 class Query(graphene.ObjectType):
-    node = relay.Node.Field()
-    all_posts = SQLAlchemyConnectionField(Post)
-    all_games = SQLAlchemyConnectionField(Game)
+    all_posts = graphene.Field(AllPosts)
+    all_games = graphene.List(Game)
+    filtered_posts = graphene.Field(FilteredPosts, title=graphene.String(default_value=""),
+                                    game_id=graphene.Int(default_value=-1), char_id=graphene.Int(default_value=-1))
+
+    def resolve_all_posts(self, info):
+        return AllPosts(posts=PostModel.query.all())
+
+    def resolve_all_games(self, info):
+        return GameModel.query.all()
+
+    def resolve_filtered_posts(self, info, title, game_id, char_id):
+        terms = title.split(" ")
+        regexp = "(?=.*" + ")(?=.*".join(terms) + ")"
+        current_query = PostModel.query.filter(text("title ~* :regexp")).params(regexp=regexp)
+        if char_id != -1:
+            current_query = current_query.filter(PostModel.char_id == char_id)
+        if game_id != -1:
+            current_query = current_query.filter(PostModel.game_id == game_id)
+        return FilteredPosts(posts=current_query, size=current_query.count())
 
 
 schema = graphene.Schema(query=Query, mutation=Mutations)

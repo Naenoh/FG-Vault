@@ -11,10 +11,22 @@ String = db.String
 relationship = db.relationship
 ForeignKey = db.ForeignKey
 
-
 Base = declarative_base()
 # We will need this for querying
 Base.query = db.session.query_property()
+
+cats = db.Table('cats',
+                Column('post_id', Integer, ForeignKey('posts.id'), primary_key=True),
+                Column('category_id', Integer, ForeignKey('categories.id'), primary_key=True))
+
+
+class Category(db.Model):
+    __tablename__ = 'categories'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(64), unique=True)
+
+    def __repr__(self):
+        return '<Category %r>' % self.name
 
 
 class Post(db.Model):
@@ -25,6 +37,7 @@ class Post(db.Model):
     game = relationship('Game', backref='posts')
     char_id = Column(Integer, ForeignKey('chars.id'))
     char = relationship('Char', backref='posts')
+    categories = relationship('Category', secondary=cats)
 
     def __repr__(self):
         return '<Post %r>' % self.title

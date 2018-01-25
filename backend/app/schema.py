@@ -3,7 +3,12 @@ import sqlalchemy
 from graphene_sqlalchemy import SQLAlchemyObjectType
 from sqlalchemy import text
 
-from .models import Game as GameModel, Post as PostModel, Link as LinkModel, Char as CharModel, db
+from .models import Game as GameModel, Post as PostModel, Link as LinkModel, Char as CharModel, Category as CategoryModel, db
+
+
+class Category(SQLAlchemyObjectType):
+    class Meta:
+        model = CategoryModel
 
 
 class Game(SQLAlchemyObjectType):
@@ -61,6 +66,7 @@ class CreateGame(graphene.Mutation):
             return CreateGame(game=newgame, ok=True)
         except sqlalchemy.exc.IntegrityError:
             return CreateGame(ok=False, error="erreur")
+
 
 class DeleteGame(graphene.Mutation):
     class Arguments:

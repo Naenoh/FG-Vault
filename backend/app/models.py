@@ -1,6 +1,7 @@
 # from sqlalchemy import Column, Integer, String, ForeignKey
 # from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.ext.associationproxy import association_proxy
 
 # from .database import Base
 from app import db
@@ -14,6 +15,7 @@ ForeignKey = db.ForeignKey
 Base = declarative_base()
 # We will need this for querying
 Base.query = db.session.query_property()
+
 
 cats = db.Table('cats',
                 Column('post_id', Integer, ForeignKey('posts.id'), primary_key=True),
@@ -72,3 +74,11 @@ class Link(db.Model):
 
     def __repr__(self):
         return '<Link %r>' % self.url
+
+
+class CatsAssociation(Base):
+    __table__ = cats
+    post = relationship(Post, backref="association_recs")
+
+Post.associations_ids = association_proxy("association_recs", "category_id",
+                                          creator=lambda uid: CatsAssociation(category_id=uid))

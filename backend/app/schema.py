@@ -3,7 +3,8 @@ import sqlalchemy
 from graphene_sqlalchemy import SQLAlchemyObjectType
 from sqlalchemy import text
 
-from .models import Game as GameModel, Post as PostModel, Link as LinkModel, Char as CharModel, Category as CategoryModel, db
+from .models import Game as GameModel, Post as PostModel, Link as LinkModel, Char as CharModel, \
+    Category as CategoryModel, db
 
 
 class Category(SQLAlchemyObjectType):
@@ -34,20 +35,21 @@ class Char(SQLAlchemyObjectType):
 class CreatePost(graphene.Mutation):
     class Arguments:
         title = graphene.String()
-        game_id = graphene.String()
-        char_id = graphene.String()
+        game_id = graphene.Int()
+        char_id = graphene.Int()
+        categories_id = graphene.List(graphene.Int)
         links = graphene.List(graphene.String)
 
     ok = graphene.Boolean()
     post = graphene.Field(Post)
 
-    def mutate(self, info, title, game_id, char_id, links):
-        newpost = PostModel(title=title, game_id=game_id, char_id=char_id)
+    def mutate(self, info, title, game_id, char_id, categories_id, links):
+        newpost = PostModel(title=title, game_id=game_id, char_id=char_id, associations_ids=categories_id)
         for link in links:
             db.session.add(LinkModel(url=link, post=newpost))
         db.session.commit()
         ok = True
-        return Post(newpost)
+        return CreatePost(ok=ok, post=newpost)
 
 
 class CreateGame(graphene.Mutation):
@@ -66,6 +68,43 @@ class CreateGame(graphene.Mutation):
             return CreateGame(game=newgame, ok=True)
         except sqlalchemy.exc.IntegrityError:
             return CreateGame(ok=False, error="erreur")
+
+
+class CreateChar(graphene.Mutation):
+    class Arguments:
+        name = graphene.String()
+        game_id = graphene.Int()
+
+    ok = graphene.Boolean()
+    char = graphene.Field(Char)
+    error = graphene.String()
+
+    def mutate(self, info, name, game_id):
+        try:
+            newchar = CharModel(name=name, game_id=game_id)
+            db.session.add(newchar)
+            db.session.commit()
+            return CreateChar(char=newchar, ok=True)
+        except sqlalchemy.exc.IntegrityError:
+            return CreateChar(ok=False, error="erreur")
+
+
+class CreateCategory(graphene.Mutation):
+    class Arguments:
+        name = graphene.String()
+
+    ok = graphene.Boolean()
+    cat = graphene.Field(Category)
+    error = graphene.String()
+
+    def mutate(self, info, name):
+        try:
+            newcat = CategoryModel(name=name)
+            db.session.add(newcat)
+            db.session.commit()
+            return CreateCategory(cat=newcat, ok=True)
+        except sqlalchemy.exc.IntegrityError:
+            return CreateCategory(ok=False, error="erreur")
 
 
 class DeleteGame(graphene.Mutation):
@@ -91,6 +130,8 @@ class AllPosts(graphene.ObjectType):
 class Mutations(graphene.ObjectType):
     create_post = CreatePost.Field()
     create_game = CreateGame.Field()
+    create_char = CreateChar.Field()
+    create_cat = CreateCategory.Field()
     delete_game = DeleteGame.Field()
 
 

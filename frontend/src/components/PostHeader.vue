@@ -4,6 +4,7 @@
     <th>Game</th>
     <th>Character</th>
     <th>Links</th>
+    <th>Categories</th>
   </tr>
 </template>
 

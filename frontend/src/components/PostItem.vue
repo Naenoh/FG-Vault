@@ -12,6 +12,14 @@
         </a>
       </div>
     </td>
+    <td>
+      <div
+        v-for="link in post.categories"
+        :key="link.id">
+        {{ link.name }}
+      </div>
+    </td>
+
   </tr>
 </template>
 

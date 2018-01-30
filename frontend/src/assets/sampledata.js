@@ -22,6 +22,12 @@ export default {
               'id': '2',
               'url': 'http://www.dustloop.com/wiki/index.php?title=GGXRD/Sol_Badguy/Combos'
             }
+          ],
+          'categories': [
+            {
+              'id': '1',
+              'name': 'combos'
+            }
           ]
         },
         {
@@ -43,6 +49,12 @@ export default {
             {
               'id': '4',
               'url': 'http://alphabla.de/ggxrd/index.php?id=14'
+            }
+          ],
+          'categories': [
+            {
+              'id': '2',
+              'name': 'data'
             }
           ]
         }

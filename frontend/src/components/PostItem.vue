@@ -14,9 +14,9 @@
     </td>
     <td>
       <div
-        v-for="link in post.categories"
-        :key="link.id">
-        {{ link.name }}
+        v-for="cat in post.categories"
+        :key="cat.id">
+        {{ cat.name }}
       </div>
     </td>
 

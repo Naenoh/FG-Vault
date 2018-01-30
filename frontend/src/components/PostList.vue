@@ -3,13 +3,10 @@
     <table>
       <post-header/>
       <post-item
-        v-for="post in posts"
+        v-for="post in allPosts.posts"
         :post="post"
         :key="post.id"/>
     </table>
-    <p>
-      {{ allPosts.posts }}
-    </p>
   </div>
 </template>
 
@@ -29,7 +26,7 @@ export default {
     }
   },
   apollo: {
-    allPosts: gql`{allPosts{posts{title}}}`
+    allPosts: gql`{allPosts{posts{title game{name} char{name} categories{name} links{url}}}}`
   },
   data () {
     return {

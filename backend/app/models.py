@@ -42,7 +42,7 @@ class Post(db.Model):
     categories = relationship('Category', secondary=cats)
 
     def __repr__(self):
-        return '<Post dazhygdsqdjhsqb%r>' % self.title
+        return '<Post %r>' % self.title
 
 
 class Game(db.Model):

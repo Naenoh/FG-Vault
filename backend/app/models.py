@@ -28,7 +28,7 @@ class Category(db.Model):
     name = Column(String(64), unique=True)
 
     def __repr__(self):
-        return '<Category %r>' % self.name
+        return '<Category dzanjkdnazjkndzaj%r>' % self.name
 
 
 class Post(db.Model):
@@ -42,7 +42,7 @@ class Post(db.Model):
     categories = relationship('Category', secondary=cats)
 
     def __repr__(self):
-        return '<Post %r>' % self.title
+        return '<Post dzaidnzadnazkn%r>' % self.title
 
 
 class Game(db.Model):
@@ -51,7 +51,7 @@ class Game(db.Model):
     name = Column(String(64), unique=True)
 
     def __repr__(self):
-        return '<Game %r>' % self.name
+        return '<Game dnzajkndjzakdnjakz%r>' % self.name
 
 
 class Char(db.Model):
@@ -62,7 +62,7 @@ class Char(db.Model):
     game = relationship('Game', backref='chars')
 
     def __repr__(self):
-        return '<Char %r>' % self.name
+        return '<Char dzajazkdndjaz%r>' % self.name
 
 
 class Link(db.Model):
@@ -73,7 +73,7 @@ class Link(db.Model):
     post = relationship('Post', backref='links')
 
     def __repr__(self):
-        return '<Link %r>' % self.url
+        return '<Link dnazjkdzakdnjazkdzja%r>' % self.url
 
 
 class CatsAssociation(Base):

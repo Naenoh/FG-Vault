@@ -1,5 +1,9 @@
 <template>
   <div class="post-list">
+    <h1>{{ searchValue.text }} {{ searchValue.gameId}}</h1>
+    <post-searchbar
+      :searchval.sync="searchValue"
+      :games="allGames"/>
     <table>
       <post-header/>
       <post-item
@@ -13,27 +17,23 @@
 <script>
 import PostItem from './PostItem.vue'
 import PostHeader from './PostHeader.vue'
+import PostSearchbar from './PostSearchbar.vue'
 import gql from 'graphql-tag'
 
 export default {
   name: 'PostList',
-  props: {
-    posts: {
-      type: Array,
-      default: function () {
-        return {}
-      }
-    }
-  },
   apollo: {
-    allPosts: gql`{allPosts{posts{title game{name} char{name} categories{name} links{url}}}}`
+    allPosts: gql`{allPosts{posts{title game{name} char{name} categories{name} links{url}}}}`,
+    allGames: gql`{allGames{id name chars{id name}}}`
   },
   data () {
     return {
-      allPosts: ''
+      allPosts: {},
+      allGames: [],
+      searchValue: {text: '', gameId: -1}
     }
   },
-  components: { PostItem, PostHeader }
+  components: { PostItem, PostHeader, PostSearchbar }
 }
 
 </script>

@@ -85,8 +85,8 @@ class CreateChar(graphene.Mutation):
             db.session.add(newchar)
             db.session.commit()
             return CreateChar(char=newchar, ok=True)
-        except sqlalchemy.exc.IntegrityError:
-            return CreateChar(ok=False, error="erreur")
+        except sqlalchemy.exc.IntegrityError as err:
+            return CreateChar(ok=False, error=err)
 
 
 class CreateCategory(graphene.Mutation):
@@ -153,6 +153,7 @@ class Query(graphene.ObjectType):
         return GameModel.query.all()
 
     def resolve_filtered_posts(self, info, title, game_id, char_id):
+        print("blabla")
         terms = title.split(" ")
         regexp = "(?=.*" + ")(?=.*".join(terms) + ")"
         current_query = PostModel.query.filter(text("title ~* :regexp")).params(regexp=regexp)

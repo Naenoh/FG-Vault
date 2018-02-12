@@ -6,11 +6,23 @@
       id="post-search-input">
     <select
     v-model="searchval.gameId">
+      <option value=-1>Any</option>
       <option
         v-for="game in games"
         :value="game.id"
         :key="game.id">
         {{ game.name }}
+      </option>
+    </select>
+    <select
+      v-if="searchval.gameId != -1"
+      v-model="searchval.charId">
+      <option value=-1>Any</option>
+      <option
+        v-for="char in chars"
+        :value="char.id"
+        :key="char.id">
+        {{ char.name }}
       </option>
     </select>
   </div>
@@ -21,7 +33,7 @@ export default {
   name: 'PostSearchbar',
   data: function () {
     return {
-      searchval: {text: '', gameId: -1}
+      searchval: {text: '', gameId: -1, charId: -1}
     }
   },
   props: {
@@ -30,6 +42,11 @@ export default {
       default: function () {
         return []
       }
+    }
+  },
+  computed: {
+    chars: function () {
+      return this.games.find((game) => game.id === this.searchval.gameId).chars
     }
   },
   watch: {

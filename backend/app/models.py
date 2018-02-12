@@ -57,7 +57,7 @@ class Game(db.Model):
 class Char(db.Model):
     __tablename__ = 'chars'
     id = Column(Integer, primary_key=True)
-    name = Column(String(64), unique=True)
+    name = Column(String(64))
     game_id = Column(Integer, ForeignKey('games.id'))
     game = relationship('Game', backref='chars')
 

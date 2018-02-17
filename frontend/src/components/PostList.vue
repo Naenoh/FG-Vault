@@ -11,6 +11,9 @@
         :post="post"
         :key="post.id"/>
     </table>
+    <post-form
+      :games="allGames"
+      :categories="allCategories"/>
   </div>
 </template>
 
@@ -18,6 +21,7 @@
 import PostItem from './PostItem.vue'
 import PostHeader from './PostHeader.vue'
 import PostSearchbar from './PostSearchbar.vue'
+import PostForm from './PostForm.vue'
 import gql from 'graphql-tag'
 
 export default {
@@ -25,6 +29,7 @@ export default {
   apollo: {
     allPosts: gql`{allPosts{posts{title game{name} char{name} categories{name} links{url}}}}`,
     allGames: gql`{allGames{id name chars{id name}}}`,
+    allCategories: gql`{allCategories{id name}}`,
     filteredPosts: {
       query: gql`query getFilteredPosts($title: String, $gameId: Int, $charId: Int){
            filteredPosts(title:$title,gameId:$gameId,charId:$charId){posts{title game{name} char{name} categories{name} links{url}}}
@@ -42,11 +47,12 @@ export default {
     return {
       allPosts: {},
       allGames: [],
+      allCategories: [],
       filteredPosts: {},
       searchValue: {text: '', gameId: -1, charId: -1}
     }
   },
-  components: { PostItem, PostHeader, PostSearchbar }
+  components: { PostItem, PostHeader, PostSearchbar, PostForm }
 }
 
 </script>

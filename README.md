@@ -15,6 +15,19 @@
 
 ### Stack
 
-- Spring Boot/Postgresql
-- React(?)
-- Small libs if possible
+- Flask/SQLAlchemy/Graphene(GraphQL)/Postgres
+- Vue
+
+### TODOS
+
+- Finish search (categories)
+- Finish Submit 
+	- Multiple categories
+	- Test links
+	- Validation
+- Style up
+- Polish
+	- Error handling
+	- Feedback
+	- Validation
+- Duplicate Handling

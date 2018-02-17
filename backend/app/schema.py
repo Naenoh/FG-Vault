@@ -143,6 +143,7 @@ class FilteredPosts(graphene.ObjectType):
 class Query(graphene.ObjectType):
     all_posts = graphene.Field(AllPosts)
     all_games = graphene.List(Game)
+    all_categories = graphene.List(Category)
     filtered_posts = graphene.Field(FilteredPosts, title=graphene.String(default_value=""),
                                     game_id=graphene.Int(default_value=-1), char_id=graphene.Int(default_value=-1))
 
@@ -151,6 +152,9 @@ class Query(graphene.ObjectType):
 
     def resolve_all_games(self, info):
         return GameModel.query.all()
+
+    def resolve_all_categories(self, info):
+        return CategoryModel.query.all()
 
     def resolve_filtered_posts(self, info, title, game_id, char_id):
         print("blabla")

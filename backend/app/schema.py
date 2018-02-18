@@ -144,8 +144,11 @@ class Query(graphene.ObjectType):
     all_posts = graphene.Field(AllPosts)
     all_games = graphene.List(Game)
     all_categories = graphene.List(Category)
-    filtered_posts = graphene.Field(FilteredPosts, title=graphene.String(default_value=""),
-                                    game_id=graphene.Int(default_value=-1), char_id=graphene.Int(default_value=-1))
+    filtered_posts = graphene.Field(FilteredPosts,
+                                    title=graphene.String(default_value=""),
+                                    game_id=graphene.Int(default_value=-1),
+                                    char_id=graphene.Int(default_value=-1),
+                                    cat_ids=graphene.List(graphene.Int))
 
     def resolve_all_posts(self, info):
         return AllPosts(posts=PostModel.query.all())
@@ -156,8 +159,7 @@ class Query(graphene.ObjectType):
     def resolve_all_categories(self, info):
         return CategoryModel.query.all()
 
-    def resolve_filtered_posts(self, info, title, game_id, char_id):
-        print("blabla")
+    def resolve_filtered_posts(self, info, title, game_id, char_id, cat_ids):
         terms = title.split(" ")
         regexp = "(?=.*" + ")(?=.*".join(terms) + ")"
         current_query = PostModel.query.filter(text("title ~* :regexp")).params(regexp=regexp)
@@ -165,6 +167,8 @@ class Query(graphene.ObjectType):
             current_query = current_query.filter(PostModel.char_id == char_id)
         if game_id != -1:
             current_query = current_query.filter(PostModel.game_id == game_id)
+        if cat_ids != [None] and cat_ids:
+            current_query = current_query.join(PostModel.categories).filter(CategoryModel.id.in_(cat_ids))
         return FilteredPosts(posts=current_query, size=current_query.count())
 
 

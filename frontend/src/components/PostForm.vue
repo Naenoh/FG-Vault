@@ -2,42 +2,52 @@
   <div class="post-form">
     <label>Title :
       <input
+        class="input"
         v-model="title"
         id="post-form-title">
     </label>
-    <select v-model="gameId">
-      <option value=-1>Any</option>
-      <option
-        v-for="game in games"
-        :value="game.id"
-        :key="game.id">
-        {{ game.name }}
-      </option>
-    </select>
-    <select
-      v-if="gameId != -1"
-      v-model="charId">
-      <option value=-1>Any</option>
-      <option
-        v-for="char in chars"
-        :value="char.id"
-        :key="char.id">
-        {{ char.name }}
-      </option>
-    </select>
+    <div class="select">
+      <select v-model="gameId">
+        <option value=-1>Any</option>
+        <option
+          v-for="game in games"
+          :value="game.id"
+          :key="game.id">
+          {{ game.name }}
+        </option>
+      </select>
+    </div>
+    <div
+      class="select"
+      v-if="gameId != -1">
+      <select v-model="charId">
+        <option value=-1>Any</option>
+        <option
+          v-for="char in chars"
+          :value="char.id"
+          :key="char.id">
+          {{ char.name }}
+        </option>
+      </select>
+    </div>
     <textarea
+      class="textarea"
       v-model="urls"
       id="post-form-urls"/>
-    <select v-model="catId">
-      <option value=-1>-</option>
-      <option
-        v-for="cat in categories"
-        :value="cat.id"
-        :key="cat.id">
-        {{ cat.name }}
-      </option>
-    </select>
-    <button @click="submitPost">Submit</button>
+    <div class="select">
+      <select v-model="catId">
+        <option value=-1>-</option>
+        <option
+          v-for="cat in categories"
+          :value="cat.id"
+          :key="cat.id">
+          {{ cat.name }}
+        </option>
+      </select>
+    </div>
+    <button
+      class="button"
+      @click="submitPost">Submit</button>
   </div>
 </template>
 
@@ -77,11 +87,11 @@ export default {
   methods: {
     submitPost () {
       const newPost = {
-        title: this.title,
+        title: this.title.trim(),
         gameId: this.gameId,
         charId: this.charId,
-        urls: this.urls.split('\n'),
-        catId: [this.catId]
+        urls: this.urls.trim().split('\n'),
+        catId: this.catId !== -1 ? [this.catId] : []
       }
       this.$apollo.mutate({
         mutation: gql`mutation createPost($title: String, $gameId: Int, $charId: Int, $categoriesId: [Int], $links: [String]){

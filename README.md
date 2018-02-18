@@ -22,8 +22,7 @@
 
 - Finish search (categories)
 - Finish Submit 
-	- Multiple categories
-	- Test links
+	- Multiple categories LATER
 	- Validation
 - Style up
 - Polish
@@ -31,3 +30,10 @@
 	- Feedback
 	- Validation
 - Duplicate Handling
+
+### Issues
+
+- duplicated queries for game/categories (search&submit)
+- search code is ugly (multiple ifs, None/[] thing)
+- category search breaks on default value
+- Bulma import is possibly ugly ?

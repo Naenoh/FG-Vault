@@ -1,16 +1,17 @@
 <template>
-  <div class="post-list">
+  <div class="post-list container">
     <post-searchbar
       :searchval.sync="searchValue"
       :games="allGames"
       :categories="allCategories"/>
-    <table class="table">
+    <table class="table is-hoverable">
       <post-header/>
       <tbody>
         <post-item
           v-for="post in filteredPosts.posts"
           :post="post"
-          :key="post.id"/>
+          :key="post.id"
+          @updateGameId="updateGameId"/>
       </tbody>
     </table>
     <post-form
@@ -34,14 +35,14 @@ export default {
     allCategories: gql`{allCategories{id name}}`,
     filteredPosts: {
       query: gql`query getFilteredPosts($title: String, $gameId: Int, $charId: Int, $catIds: [Int]){
-           filteredPosts(title:$title,gameId:$gameId,charId:$charId, catIds:$catIds){posts{title game{name} char{name} categories{name} links{url}}}
+           filteredPosts(title:$title,gameId:$gameId,charId:$charId, catIds:$catIds){posts{title game{id name} char{id name} categories{id name} links{url}}}
         }`,
       variables () {
         return {
           title: this.searchValue.text,
           gameId: this.searchValue.gameId,
           charId: this.searchValue.charId,
-          catIds: this.searchValue.catId !== '-1' ? [this.searchValue.catId] : []
+          catIds: this.searchValue.catId !== -1 && this.searchValue.catId !== '-1' ? [this.searchValue.catId] : []
         }
       }
     }
@@ -52,7 +53,12 @@ export default {
       allGames: [],
       allCategories: [],
       filteredPosts: {},
-      searchValue: {text: '', gameId: -1, charId: -1, catId: '-1'}
+      searchValue: {text: '', gameId: -1, charId: -1, catId: -1}
+    }
+  },
+  methods: {
+    updateGameId: function (val) {
+      this.searchValue.gameId = val
     }
   },
   components: { PostItem, PostHeader, PostSearchbar, PostForm }

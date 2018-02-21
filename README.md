@@ -37,3 +37,4 @@
 - search code is ugly (multiple ifs, None/[] thing)
 - category search breaks on default value
 - Bulma import is possibly ugly ?
+- the searchValue thing is poorly implemented (use prop ?)

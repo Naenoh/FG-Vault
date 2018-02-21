@@ -1,8 +1,17 @@
 <template>
   <tr class="post-item">
     <td>{{ post.title }}</td>
-    <td>{{ post.game.name }}</td>
-    <td>{{ post.char.name }}</td>
+    <td>
+      <a
+        class="tag"
+        :data-id="post.game.id"
+        @click="filterGame">{{ post.game.name }}</a>
+    </td>
+    <td>
+      <a
+        class="tag"
+        :data-id="post.char.id">{{ post.char.name }}</a>
+    </td>
     <td>
       <div
         v-for="link in post.links"
@@ -13,10 +22,13 @@
       </div>
     </td>
     <td>
-      <div
-        v-for="cat in post.categories"
-        :key="cat.id">
-        {{ cat.name }}
+      <div class="tags">
+        <a
+          v-for="cat in post.categories"
+          :key="cat.id"
+          class="tag">
+          {{ cat.name }}
+        </a>
       </div>
     </td>
 
@@ -32,6 +44,11 @@ export default {
       default: function () {
         return {}
       }
+    }
+  },
+  methods: {
+    filterGame: function (a) {
+      this.$emit('updateGameId', a.target.dataset.id)
     }
   }
 }

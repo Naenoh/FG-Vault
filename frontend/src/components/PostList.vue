@@ -1,12 +1,28 @@
 <template>
   <div class="post-list container">
-    <post-searchbar
-      :game-id.sync="gameId"
-      :char-id.sync="charId"
-      :title.sync="title"
-      :cat-ids.sync="catIds"
+    <label for="post-search-input">Name : </label>
+    <input
+      class="input"
+      v-model="title"
+      id="post-search-input">
+    <game-char-picker
       :games="allGames"
-      :categories="allCategories"/>
+      :game-id.sync="gameId"
+      :char-id.sync="charId"/>
+    <div class="select">
+      <select v-model="catIds">
+        <option value=-1>Any</option>
+        <option
+          v-for="cat in allCategories"
+          :value="cat.id"
+          :key="cat.id">
+          {{ cat.name }}
+        </option>
+      </select>
+    </div>
+    <a
+      class="delete"
+      @click="resetFilters"/>
     <table class="table is-hoverable">
       <post-header/>
       <tbody>
@@ -14,7 +30,8 @@
           v-for="post in filteredPosts.posts"
           :post="post"
           :key="post.id"
-          @updateGameId="updateGameId"/>
+          @updateGameId="updateGameId"
+          @updateCharId="updateCharId"/>
       </tbody>
     </table>
     <post-form
@@ -26,8 +43,8 @@
 <script>
 import PostItem from './PostItem.vue'
 import PostHeader from './PostHeader.vue'
-import PostSearchbar from './PostSearchbar.vue'
 import PostForm from './PostForm.vue'
+import GameCharPicker from './GameCharPicker.vue'
 import gql from 'graphql-tag'
 
 export default {
@@ -65,9 +82,28 @@ export default {
   methods: {
     updateGameId: function (val) {
       this.gameId = val
+    },
+    updateCharId: function (val) {
+      this.gameId = val.game
+      this.charId = val.char
+    },
+    resetFilters: function () {
+      this.title = ''
+      this.gameId = '-1'
+      this.charId = '-1'
+      this.catId = '-1'
     }
   },
-  components: { PostItem, PostHeader, PostSearchbar, PostForm }
+  watch: {
+    gameId: {
+      handler (a, b) {
+        if (b !== '-1') {
+          this.charId = '-1'
+        }
+      }
+    }
+  },
+  components: { PostItem, PostHeader, PostForm, GameCharPicker }
 }
 
 </script>

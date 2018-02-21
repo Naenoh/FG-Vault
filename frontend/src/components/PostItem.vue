@@ -4,13 +4,12 @@
     <td>
       <a
         class="tag"
-        :data-id="post.game.id"
         @click="filterGame">{{ post.game.name }}</a>
     </td>
     <td>
       <a
         class="tag"
-        :data-id="post.char.id">{{ post.char.name }}</a>
+        @click="filterChar">{{ post.char.name }}</a>
     </td>
     <td>
       <div
@@ -47,8 +46,11 @@ export default {
     }
   },
   methods: {
-    filterGame: function (a) {
-      this.$emit('updateGameId', a.target.dataset.id)
+    filterGame: function () {
+      this.$emit('updateGameId', this.post.game.id)
+    },
+    filterChar: function () {
+      this.$emit('updateCharId', { game: this.post.game.id, char: this.post.char.id })
     }
   }
 }

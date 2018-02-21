@@ -1,7 +1,10 @@
 <template>
   <div class="post-list container">
     <post-searchbar
-      :searchval.sync="searchValue"
+      :game-id.sync="gameId"
+      :char-id.sync="charId"
+      :title.sync="title"
+      :cat-ids.sync="catIds"
       :games="allGames"
       :categories="allCategories"/>
     <table class="table is-hoverable">
@@ -39,10 +42,10 @@ export default {
         }`,
       variables () {
         return {
-          title: this.searchValue.text,
-          gameId: this.searchValue.gameId,
-          charId: this.searchValue.charId,
-          catIds: this.searchValue.catId !== -1 && this.searchValue.catId !== '-1' ? [this.searchValue.catId] : []
+          title: this.title,
+          gameId: this.gameId,
+          charId: this.charId,
+          catIds: this.catIds !== '-1' ? [this.catIds] : []
         }
       }
     }
@@ -53,12 +56,15 @@ export default {
       allGames: [],
       allCategories: [],
       filteredPosts: {},
-      searchValue: {text: '', gameId: -1, charId: -1, catId: -1}
+      title: '',
+      gameId: '-1',
+      charId: '-1',
+      catIds: '-1'
     }
   },
   methods: {
     updateGameId: function (val) {
-      this.searchValue.gameId = val
+      this.gameId = val
     }
   },
   components: { PostItem, PostHeader, PostSearchbar, PostForm }

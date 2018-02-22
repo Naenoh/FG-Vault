@@ -20,15 +20,19 @@
 
 ### TODOS
 
+##### Before beta:
+- Backend
+	- Validation
+	- Duplicate Handling
+- Frontend
+	- Test create Post
+	- Feedback (includes errors)
+
+##### Later:
 - Finish search 
 	- Multiple categories LATER
 - Finish Submit 
 	- Multiple categories LATER
-	- Validation
-- Polish
-	- Error handling
-	- Feedback
-- Duplicate Handling
 
 ### Issues
 

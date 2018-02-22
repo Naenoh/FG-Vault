@@ -42,14 +42,18 @@ class CreatePost(graphene.Mutation):
 
     ok = graphene.Boolean()
     post = graphene.Field(Post)
+    error = graphene.String()
 
     def mutate(self, info, title, game_id, char_id, categories_id, links):
-        newpost = PostModel(title=title, game_id=game_id, char_id=char_id, associations_ids=categories_id)
-        for link in links:
-            db.session.add(LinkModel(url=link, post=newpost))
-        db.session.commit()
-        ok = True
-        return CreatePost(ok=ok, post=newpost)
+        try:
+            newpost = PostModel(title=title, game_id=game_id, char_id=char_id, associations_ids=categories_id)
+            for link in links:
+                db.session.add(LinkModel(url=link, post=newpost))
+            db.session.commit()
+            ok = True
+            return CreatePost(ok=ok, post=newpost)
+        except:
+            return CreatePost(ok=False, error="An error occured while adding you post")
 
 
 class CreateGame(graphene.Mutation):
@@ -129,10 +133,10 @@ class AllPosts(graphene.ObjectType):
 
 class Mutations(graphene.ObjectType):
     create_post = CreatePost.Field()
-    create_game = CreateGame.Field()
-    create_char = CreateChar.Field()
-    create_cat = CreateCategory.Field()
-    delete_game = DeleteGame.Field()
+    # create_game = CreateGame.Field()
+    # create_char = CreateChar.Field()
+    # create_cat = CreateCategory.Field()
+    # delete_game = DeleteGame.Field()
 
 
 class FilteredPosts(graphene.ObjectType):
@@ -141,7 +145,7 @@ class FilteredPosts(graphene.ObjectType):
 
 
 class Query(graphene.ObjectType):
-    all_posts = graphene.Field(AllPosts)
+    # all_posts = graphene.Field(AllPosts)
     all_games = graphene.List(Game)
     all_categories = graphene.List(Category)
     filtered_posts = graphene.Field(FilteredPosts,

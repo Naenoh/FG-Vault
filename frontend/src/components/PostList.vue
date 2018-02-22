@@ -5,9 +5,12 @@
       class="input"
       v-model="title"
       id="post-search-input">
-    <game-char-picker
+    <game-picker
       :games="allGames"
-      :game-id.sync="gameId"
+      :game-id.sync="gameId"/>
+    <char-picker
+      v-if="gameId != -1"
+      :chars="chars"
       :char-id.sync="charId"/>
     <cat-picker
       :categories="allCategories"
@@ -44,8 +47,9 @@
 import PostItem from './PostItem.vue'
 import PostHeader from './PostHeader.vue'
 import PostForm from './PostForm.vue'
-import GameCharPicker from './GameCharPicker.vue'
 import CatPicker from './CatPicker.vue'
+import GamePicker from './GamePicker.vue'
+import CharPicker from './CharPicker.vue'
 import gql from 'graphql-tag'
 
 export default {
@@ -113,6 +117,9 @@ export default {
         catIds: this.catIds
       }
       return !(JSON.stringify(this.baseData) === JSON.stringify(currentData))
+    },
+    chars: function () {
+      return this.allGames.find((game) => game.id === this.gameId).chars
     }
   },
   watch: {
@@ -124,7 +131,7 @@ export default {
       }
     }
   },
-  components: { PostItem, PostHeader, PostForm, GameCharPicker, CatPicker }
+  components: { PostItem, PostHeader, PostForm, CatPicker, GamePicker, CharPicker }
 }
 
 </script>

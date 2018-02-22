@@ -15,33 +15,33 @@
 </template>
 
 <script>
-  export default {
-    name: 'CharPicker',
-    props: {
-      chars: {
-        type: Array,
-        default: function () {
-          return []
-        }
-      },
-      charId: {
-        type: String,
-        default: function () {
-          return '-1'
-        }
+export default {
+  name: 'CharPicker',
+  props: {
+    chars: {
+      type: Array,
+      default: function () {
+        return []
       }
     },
-    computed: {
-      charIdC: {
-        get: function () {
-          return this.charId
-        },
-        set: function (newValue) {
-          this.$emit('update:charId', newValue)
-        }
+    charId: {
+      type: String,
+      default: function () {
+        return '-1'
+      }
+    }
+  },
+  computed: {
+    charIdC: {
+      get: function () {
+        return this.charId
+      },
+      set: function (newValue) {
+        this.$emit('update:charId', newValue)
       }
     }
   }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

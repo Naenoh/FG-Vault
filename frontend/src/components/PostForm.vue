@@ -5,14 +5,19 @@
       @click="toggleModal">
       Create post
     </button>
-    <div class="modal">
-      <div class="modal-background"/>
+    <div
+      class="modal"
+      :class="{ 'is-active': visible }">
+      <div
+        class="modal-background"
+        @click="toggleModal"/>
       <div class="modal-card">
         <header class="modal-card-head">
           <p class="modal-card-title">Create post</p>
           <button
             class="delete"
-            aria-label="close"></button>
+            aria-label="close"
+            @click="toggleModal"/>
         </header>
         <section class="modal-card-body">
           <div class="field">
@@ -22,21 +27,34 @@
               v-model="title"
               id="post-form-title">
           </div>
-          <div class="field">
-            <label class="label">Game</label>
-
-          </div>
-          <div class="field">
-            <label class="label">Character</label>
-
+          <div class="columns">
+            <div class="field column">
+              <label class="label">Game</label>
+              <game-picker
+                :games="games"
+                :game-id.sync="gameId"/>
+            </div>
+            <div
+              v-if="gameId != -1"
+              class="field column">
+              <label class="label">Character</label>
+              <char-picker
+                :chars="chars"
+                :char-id.sync="charId"/>
+            </div>
           </div>
           <div class="field">
             <label class="label">Urls</label>
-
+            <textarea
+              class="textarea"
+              v-model="urls"
+              id="post-form-urls"/>
           </div>
           <div class="field">
             <label class="label">Category</label>
-
+            <cat-picker
+              :categories="categories"
+              :cat-ids.sync="catIds"/>
           </div>
         </section>
         <footer class="modal-card-foot">
@@ -45,7 +63,7 @@
         </footer>
       </div>
     </div>
-    <label>Title :
+    <!--<label>Title :
 
     </label>
     <div class="select">
@@ -72,12 +90,8 @@
         </option>
       </select>
     </div>
-    <textarea
-      class="textarea"
-      v-model="urls"
-      id="post-form-urls"/>
     <div class="select">
-      <select v-model="catId">
+      <select v-model="catIds">
         <option value=-1>-</option>
         <option
           v-for="cat in categories"
@@ -89,21 +103,24 @@
     </div>
     <button
       class="button"
-      @click="submitPost">Submit</button>
+      @click="submitPost">Submit</button>-->
   </div>
 </template>
 
 <script>
 import gql from 'graphql-tag'
+import CatPicker from './CatPicker.vue'
+import GamePicker from './GamePicker.vue'
+import CharPicker from './CharPicker.vue'
 
 export default {
   name: 'PostForm',
   data: function () {
     return {
       title: '',
-      gameId: -1,
-      charId: -1,
-      catId: -1,
+      gameId: '-1',
+      charId: '-1',
+      catIds: '-1',
       urls: '',
       visible: false
     }
@@ -137,7 +154,7 @@ export default {
         gameId: this.gameId,
         charId: this.charId,
         urls: this.urls.trim().split('\n'),
-        catId: this.catId !== -1 ? [this.catId] : []
+        catIds: this.catIds !== -1 ? [this.catIds] : []
       }
       this.$apollo.mutate({
         mutation: gql`mutation createPost($title: String, $gameId: Int, $charId: Int, $categoriesId: [Int], $links: [String]){
@@ -150,7 +167,7 @@ export default {
           title: newPost.title,
           gameId: newPost.gameId,
           charId: newPost.charId,
-          categoriesId: newPost.catId,
+          categoriesId: newPost.catIds,
           links: newPost.urls
         }
       }).then(data => {
@@ -159,7 +176,8 @@ export default {
         console.error(error)
       })
     }
-  }
+  },
+  components: { GamePicker, CharPicker, CatPicker }
 }
 </script>
 

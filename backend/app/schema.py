@@ -173,7 +173,7 @@ class Query(graphene.ObjectType):
             current_query = current_query.filter(PostModel.game_id == game_id)
         if cat_ids != [None] and cat_ids:
             current_query = current_query.join(PostModel.categories).filter(CategoryModel.id.in_(cat_ids))
-        return FilteredPosts(posts=current_query, size=current_query.count())
+        return FilteredPosts(posts=reversed(current_query.all()), size=current_query.count())
 
 
 schema = graphene.Schema(query=Query, mutation=Mutations)

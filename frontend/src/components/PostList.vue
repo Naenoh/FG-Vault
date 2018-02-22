@@ -9,20 +9,19 @@
       :games="allGames"
       :game-id.sync="gameId"
       :char-id.sync="charId"/>
-    <div class="select">
-      <select v-model="catIds">
-        <option value=-1>Any</option>
-        <option
-          v-for="cat in allCategories"
-          :value="cat.id"
-          :key="cat.id">
-          {{ cat.name }}
-        </option>
-      </select>
+    <cat-picker
+      :categories="allCategories"
+      :cat-ids.sync="catIds"/>
+    <div
+      class="block"
+      v-if="isFiltered">
+      <span class="tag is-danger">
+        Reset
+        <button
+          class="delete"
+          @click="resetFilters"/>
+      </span>
     </div>
-    <a
-      class="delete"
-      @click="resetFilters"/>
     <table class="table is-hoverable">
       <post-header/>
       <tbody>
@@ -31,7 +30,8 @@
           :post="post"
           :key="post.id"
           @updateGameId="updateGameId"
-          @updateCharId="updateCharId"/>
+          @updateCharId="updateCharId"
+          @updateCatIds="updateCatIds"/>
       </tbody>
     </table>
     <post-form
@@ -45,6 +45,7 @@ import PostItem from './PostItem.vue'
 import PostHeader from './PostHeader.vue'
 import PostForm from './PostForm.vue'
 import GameCharPicker from './GameCharPicker.vue'
+import CatPicker from './CatPicker.vue'
 import gql from 'graphql-tag'
 
 export default {
@@ -76,7 +77,13 @@ export default {
       title: '',
       gameId: '-1',
       charId: '-1',
-      catIds: '-1'
+      catIds: '-1',
+      baseData: {
+        title: '',
+        gameId: '-1',
+        charId: '-1',
+        catIds: '-1'
+      }
     }
   },
   methods: {
@@ -87,11 +94,25 @@ export default {
       this.gameId = val.game
       this.charId = val.char
     },
+    updateCatIds: function (val) {
+      this.catIds = val
+    },
     resetFilters: function () {
       this.title = ''
       this.gameId = '-1'
       this.charId = '-1'
-      this.catId = '-1'
+      this.catIds = '-1'
+    }
+  },
+  computed: {
+    isFiltered: function () {
+      const currentData = {
+        title: this.title,
+        gameId: this.gameId,
+        charId: this.charId,
+        catIds: this.catIds
+      }
+      return !(JSON.stringify(this.baseData) === JSON.stringify(currentData))
     }
   },
   watch: {
@@ -103,7 +124,7 @@ export default {
       }
     }
   },
-  components: { PostItem, PostHeader, PostForm, GameCharPicker }
+  components: { PostItem, PostHeader, PostForm, GameCharPicker, CatPicker }
 }
 
 </script>

@@ -1,6 +1,5 @@
 <template>
   <div class="game-char-picker">
-    <h1> {{ gameId }} </h1>
     <div class="select">
       <select v-model="gameIdC">
         <option value=-1>Any</option>

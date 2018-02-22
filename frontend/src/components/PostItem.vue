@@ -25,7 +25,9 @@
         <a
           v-for="cat in post.categories"
           :key="cat.id"
-          class="tag">
+          class="tag"
+          :data-id="cat.id"
+          @click="filterCat">
           {{ cat.name }}
         </a>
       </div>
@@ -51,6 +53,9 @@ export default {
     },
     filterChar: function () {
       this.$emit('updateCharId', { game: this.post.game.id, char: this.post.char.id })
+    },
+    filterCat: function (a) {
+      this.$emit('updateCatIds', a.target.dataset.id)
     }
   }
 }

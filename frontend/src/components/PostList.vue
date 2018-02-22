@@ -1,31 +1,63 @@
 <template>
   <div class="post-list container">
-    <label for="post-search-input">Name : </label>
-    <input
-      class="input"
-      v-model="title"
-      id="post-search-input">
-    <game-picker
+    <post-form
       :games="allGames"
-      :game-id.sync="gameId"/>
-    <char-picker
-      v-if="gameId != -1"
-      :chars="chars"
-      :char-id.sync="charId"/>
-    <cat-picker
-      :categories="allCategories"
-      :cat-ids.sync="catIds"/>
-    <div
-      class="block"
-      v-if="isFiltered">
-      <span class="tag is-danger">
-        Reset
+      :categories="allCategories"/>
+    <div class="columns is-centered">
+      <div class="field has-addons column is-narrow">
+        <div class="control">
+          <div class="button is-static">Title</div>
+        </div>
+        <div class="control">
+          <input
+            class="input"
+            @input="debounceTitle"
+            id="post-search-input">
+        </div>
+      </div>
+      <div class="field has-addons column is-narrow">
+        <div class="control">
+          <div class="button is-static">Game</div>
+        </div>
+        <div class="control">
+          <game-picker
+            :games="allGames"
+            :game-id.sync="gameId"/>
+        </div>
+      </div>
+      <div
+        class="field has-addons column is-narrow"
+        v-if="gameId != -1">
+        <div class="control">
+          <div class="button is-static">Char</div>
+        </div>
+        <div class="control">
+          <char-picker
+            :chars="chars"
+            :char-id.sync="charId"/>
+        </div>
+      </div>
+      <div class="field has-addons column is-narrow">
+        <div class="control">
+          <div class="button is-static">Category</div>
+        </div>
+        <div class="control">
+          <cat-picker
+            :categories="allCategories"
+            :cat-ids.sync="catIds"/>
+        </div>
+      </div>
+      <div
+        class="column is-narrow"
+        v-if="isFiltered">
         <button
-          class="delete"
-          @click="resetFilters"/>
-      </span>
+          class="button is-danger"
+          @click="resetFilters">
+          Reset
+        </button>
+      </div>
     </div>
-    <table class="table is-hoverable">
+    <table class="table is-hoverable is-fullwidth">
       <post-header/>
       <tbody>
         <post-item
@@ -37,9 +69,6 @@
           @updateCatIds="updateCatIds"/>
       </tbody>
     </table>
-    <post-form
-      :games="allGames"
-      :categories="allCategories"/>
   </div>
 </template>
 
@@ -51,6 +80,7 @@ import CatPicker from './CatPicker.vue'
 import GamePicker from './GamePicker.vue'
 import CharPicker from './CharPicker.vue'
 import gql from 'graphql-tag'
+import debounce from 'lodash.debounce'
 
 export default {
   name: 'PostList',
@@ -60,8 +90,8 @@ export default {
     allCategories: gql`{allCategories{id name}}`,
     filteredPosts: {
       query: gql`query getFilteredPosts($title: String, $gameId: Int, $charId: Int, $catIds: [Int]){
-           filteredPosts(title:$title,gameId:$gameId,charId:$charId, catIds:$catIds){posts{title game{id name} char{id name} categories{id name} links{url}}}
-        }`,
+          filteredPosts(title:$title,gameId:$gameId,charId:$charId, catIds:$catIds){posts{title game{id name} char{id name} categories{id name} links{url}}}
+       }`,
       variables () {
         return {
           title: this.title,
@@ -106,7 +136,10 @@ export default {
       this.gameId = '-1'
       this.charId = '-1'
       this.catIds = '-1'
-    }
+    },
+    debounceTitle: debounce(function (e) {
+      this.title = e.target.value
+    }, 200)
   },
   computed: {
     isFiltered: function () {

@@ -20,21 +20,17 @@
 
 ### TODOS
 
-- Finish search (categories)
+- Finish search 
+	- Multiple categories LATER
 - Finish Submit 
 	- Multiple categories LATER
 	- Validation
-- Style up
 - Polish
 	- Error handling
 	- Feedback
-	- Validation
 - Duplicate Handling
 
 ### Issues
 
-- duplicated queries for game/categories (search&submit)
 - search code is ugly (multiple ifs, None/[] thing)
-- category search breaks on default value
 - Bulma import is possibly ugly ?
-- the searchValue thing is poorly implemented (use prop ?)

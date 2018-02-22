@@ -1,10 +1,14 @@
 <template>
   <div class="post-form">
-    <button
-      class="button is-primary"
-      @click="toggleModal">
-      Create post
-    </button>
+    <div class="columns is-centered">
+      <div class="column is-narrow">
+        <button
+          class="button is-primary"
+          @click="toggleModal">
+          Create post
+        </button>
+      </div>
+    </div>
     <div
       class="modal"
       :class="{ 'is-active': visible }">
@@ -24,8 +28,12 @@
             <label class="label">Title</label>
             <input
               class="input"
+              :class="{ 'is-danger': emptyTitle }"
               v-model="title"
               id="post-form-title">
+            <p
+              class="help is-danger"
+              v-if="emptyTitle">This field can't be empty</p>
           </div>
           <div class="columns">
             <div class="field column">
@@ -44,11 +52,15 @@
             </div>
           </div>
           <div class="field">
-            <label class="label">Urls</label>
+            <label class="label">Links</label>
             <textarea
               class="textarea"
+              :class="{ 'is-danger': emptyLinks }"
               v-model="urls"
               id="post-form-urls"/>
+            <p
+              class="help is-danger"
+              v-if="emptyLinks">This field can't be empty</p>
           </div>
           <div class="field">
             <label class="label">Category</label>
@@ -58,8 +70,13 @@
           </div>
         </section>
         <footer class="modal-card-foot">
-          <button class="button is-success">Create</button>
-          <button class="button">Cancel</button>
+          <button
+            class="button is-success"
+            :disabled="emptyTitle || emptyLinks"
+            @click="submitPost">Create</button>
+          <button
+            class="button"
+            @click="toggleModal">Cancel</button>
         </footer>
       </div>
     </div>
@@ -142,6 +159,12 @@ export default {
   computed: {
     chars: function () {
       return this.games.find((game) => game.id === this.gameId).chars
+    },
+    emptyTitle: function () {
+      return this.title.trim() === ''
+    },
+    emptyLinks: function () {
+      return this.urls.trim() === ''
     }
   },
   methods: {

@@ -1,7 +1,7 @@
 <template>
   <div class="select cat-picker">
     <select v-model="catIdsC">
-      <option value=-1>Any</option>
+      <option value=-1>None</option>
       <option
         v-for="cat in categories"
         :value="cat.id"

@@ -85,7 +85,6 @@ import debounce from 'lodash.debounce'
 export default {
   name: 'PostList',
   apollo: {
-    allPosts: gql`{allPosts{posts{title game{name} char{name} categories{name} links{url}}}}`,
     allGames: gql`{allGames{id name chars{id name}}}`,
     allCategories: gql`{allCategories{id name}}`,
     filteredPosts: {
@@ -104,7 +103,6 @@ export default {
   },
   data () {
     return {
-      allPosts: {},
       allGames: [],
       allCategories: [],
       filteredPosts: {},

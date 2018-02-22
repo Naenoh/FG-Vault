@@ -29,10 +29,12 @@
 	- Feedback (includes errors)
 
 ##### Later:
+
 - Finish search 
 	- Multiple categories LATER
 - Finish Submit 
 	- Multiple categories LATER
+- Pagination
 
 ### Issues
 

@@ -1,5 +1,6 @@
 import graphene
 import sqlalchemy
+import validators
 from graphene_sqlalchemy import SQLAlchemyObjectType
 from sqlalchemy import text
 
@@ -42,9 +43,22 @@ class CreatePost(graphene.Mutation):
 
     ok = graphene.Boolean()
     post = graphene.Field(Post)
-    error = graphene.String()
+    errors = graphene.List(graphene.String)
 
     def mutate(self, info, title, game_id, char_id, categories_id, links):
+        title = title.strip()
+        errors = []
+        if title == '':
+            errors.append("Title can't be empty.")
+        validurls = True
+        for link in links:
+            validurls = validurls and validators.url(link)
+        if not validurls:
+            errors.append("Invalid URL(s).")
+        if not links:
+            errors.append("No URL(s).")
+        if errors:
+            return CreatePost(ok=False, errors=errors)
         try:
             newpost = PostModel(title=title, game_id=game_id, char_id=char_id, associations_ids=categories_id)
             for link in links:
@@ -52,8 +66,8 @@ class CreatePost(graphene.Mutation):
             db.session.commit()
             ok = True
             return CreatePost(ok=ok, post=newpost)
-        except:
-            return CreatePost(ok=False, error="An error occured while adding you post")
+        except sqlalchemy.exc.IntegrityError:
+            return CreatePost(ok=False, errors=["Error while creating post."])
 
 
 class CreateGame(graphene.Mutation):

@@ -22,10 +22,22 @@
 
 ##### Before beta:
 - Backend
-	- Duplicate Handling
+	- General char/game handling
 - Frontend
-	- Test create Post
+	- Test create Post -> needs general/default char/game/cat(?) handling
 	- Feedback (includes errors)
+- Deployement
+	- Iaas
+		- Docker (compose)
+			- nginx1 -> reverse-proxy
+			- nginx2 -> frontend
+			- python-alpine -> backend
+		- Let's Encrypt/Certbot -> force HTTPS
+		- Gandi -> redirect some seemein.gg subdomain
+		- AWS/GCE/RamNode/DigitalOcean
+	- PaaS
+		- Heroku
+		- Pythonanywhere(?)
 
 ##### Later:
 

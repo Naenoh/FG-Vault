@@ -31,7 +31,7 @@
 		- Docker (compose)
 			- nginx1 -> reverse-proxy
 			- nginx2 -> frontend
-			- python-alpine -> backend
+			- python-alpine-gunicorn -> backend
 		- Let's Encrypt/Certbot -> force HTTPS
 		- Gandi -> redirect some seemein.gg subdomain
 		- AWS/GCE/RamNode/DigitalOcean

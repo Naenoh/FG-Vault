@@ -1,10 +1,52 @@
 <template>
   <div class="post-form">
+    <button
+      class="button is-primary"
+      @click="toggleModal">
+      Create post
+    </button>
+    <div class="modal">
+      <div class="modal-background"/>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Create post</p>
+          <button
+            class="delete"
+            aria-label="close"></button>
+        </header>
+        <section class="modal-card-body">
+          <div class="field">
+            <label class="label">Title</label>
+            <input
+              class="input"
+              v-model="title"
+              id="post-form-title">
+          </div>
+          <div class="field">
+            <label class="label">Game</label>
+
+          </div>
+          <div class="field">
+            <label class="label">Character</label>
+
+          </div>
+          <div class="field">
+            <label class="label">Urls</label>
+
+          </div>
+          <div class="field">
+            <label class="label">Category</label>
+
+          </div>
+        </section>
+        <footer class="modal-card-foot">
+          <button class="button is-success">Create</button>
+          <button class="button">Cancel</button>
+        </footer>
+      </div>
+    </div>
     <label>Title :
-      <input
-        class="input"
-        v-model="title"
-        id="post-form-title">
+
     </label>
     <div class="select">
       <select v-model="gameId">
@@ -62,7 +104,8 @@ export default {
       gameId: -1,
       charId: -1,
       catId: -1,
-      urls: ''
+      urls: '',
+      visible: false
     }
   },
   props: {
@@ -85,6 +128,9 @@ export default {
     }
   },
   methods: {
+    toggleModal () {
+      this.visible = !this.visible
+    },
     submitPost () {
       const newPost = {
         title: this.title.trim(),

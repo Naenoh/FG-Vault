@@ -1,8 +1,9 @@
-INSERT INTO games (name) VALUES
-  ('Guilty Gear Xrd: Rev2'),
-  ('Tekken 7'),
-  ('Dragonball FighterZ'),
-  ('Blazblue: Central Fiction');
+INSERT INTO games (id, name) VALUES
+  (0,'General'),
+  (1,'Guilty Gear Xrd: Rev2'),
+  (2,'Tekken 7'),
+  (3,'Dragonball FighterZ'),
+  (4,'Blazblue: Central Fiction');
 
 INSERT INTO chars (name, game_id) VALUES
     ('Answer',1),

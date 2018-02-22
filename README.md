@@ -22,7 +22,6 @@
 
 ##### Before beta:
 - Backend
-	- Validation
 	- Duplicate Handling
 - Frontend
 	- Test create Post

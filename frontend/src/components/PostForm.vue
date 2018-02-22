@@ -35,7 +35,7 @@
               class="help is-danger"
               v-if="emptyTitle">This field can't be empty</p>
           </div>
-          <div class="columns">
+          <div class="columns is-centered">
             <div class="field column">
               <label class="label">Game</label>
               <game-picker
@@ -43,12 +43,18 @@
                 :game-id.sync="gameId"/>
             </div>
             <div
-              v-if="gameId != -1"
+              v-if="gameId != 0"
               class="field column">
               <label class="label">Character</label>
               <char-picker
                 :chars="chars"
                 :char-id.sync="charId"/>
+            </div>
+            <div class="field column">
+              <label class="label">Category</label>
+              <cat-picker
+                :categories="categories"
+                :cat-ids.sync="catIds"/>
             </div>
           </div>
           <div class="field">
@@ -62,12 +68,6 @@
               class="help is-danger"
               v-if="emptyLinks">This field can't be empty</p>
           </div>
-          <div class="field">
-            <label class="label">Category</label>
-            <cat-picker
-              :categories="categories"
-              :cat-ids.sync="catIds"/>
-          </div>
         </section>
         <footer class="modal-card-foot">
           <button
@@ -80,47 +80,6 @@
         </footer>
       </div>
     </div>
-    <!--<label>Title :
-
-    </label>
-    <div class="select">
-      <select v-model="gameId">
-        <option value=-1>Any</option>
-        <option
-          v-for="game in games"
-          :value="game.id"
-          :key="game.id">
-          {{ game.name }}
-        </option>
-      </select>
-    </div>
-    <div
-      class="select"
-      v-if="gameId != -1">
-      <select v-model="charId">
-        <option value=-1>Any</option>
-        <option
-          v-for="char in chars"
-          :value="char.id"
-          :key="char.id">
-          {{ char.name }}
-        </option>
-      </select>
-    </div>
-    <div class="select">
-      <select v-model="catIds">
-        <option value=-1>-</option>
-        <option
-          v-for="cat in categories"
-          :value="cat.id"
-          :key="cat.id">
-          {{ cat.name }}
-        </option>
-      </select>
-    </div>
-    <button
-      class="button"
-      @click="submitPost">Submit</button>-->
   </div>
 </template>
 
@@ -135,8 +94,8 @@ export default {
   data: function () {
     return {
       title: '',
-      gameId: '-1',
-      charId: '-1',
+      gameId: '0',
+      charId: '0',
       catIds: '-1',
       urls: '',
       visible: false
@@ -184,6 +143,7 @@ export default {
                         createPost(title: $title, gameId: $gameId, charId: $charId, categoriesId: $categoriesId, links: $links) {
                            ok
                            post{id title game{name} char{name} links{url} categories{name}}
+                           errors
                         }
                       }`,
         variables: {
@@ -193,8 +153,16 @@ export default {
           categoriesId: newPost.catIds,
           links: newPost.urls
         }
-      }).then(data => {
-        console.log(data)
+      }).then(response => {
+        const data = response.data.createPost
+        if (data.ok) {
+          console.log('Post successfully added.')
+          this.toggleModal()
+        } else {
+          data.errors.map(err => {
+            console.error(err)
+          })
+        }
       }).catch(error => {
         console.error(error)
       })

@@ -66,8 +66,17 @@ class CreatePost(graphene.Mutation):
             db.session.commit()
             ok = True
             return CreatePost(ok=ok, post=newpost)
-        except sqlalchemy.exc.IntegrityError:
-            return CreatePost(ok=False, errors=["Error while creating post."])
+        except sqlalchemy.exc.IntegrityError as e:
+            print(e.orig.args)
+            db.session.rollback()
+            wrongLinks = LinkModel.query.filter(LinkModel.url.in_(links)).all()
+            if wrongLinks:
+                error = "The following URL(s) are already used : "
+                error += ",".join([link.url for link in wrongLinks])
+                errors.append(error)
+            if not errors:
+                errors.append("Error while creating post.")
+            return CreatePost(ok=False, errors=errors)
 
 
 class CreateGame(graphene.Mutation):

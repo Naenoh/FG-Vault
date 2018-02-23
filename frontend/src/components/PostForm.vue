@@ -58,7 +58,9 @@
             </div>
           </div>
           <div class="field">
-            <label class="label">
+            <label
+              class="label"
+              for="post-form-urls">
               Links
               <div class="dropdown is-hoverable is-up">
                 <span class="icon has-text-info dropdown-trigger">

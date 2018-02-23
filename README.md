@@ -26,12 +26,14 @@
 - Frontend
 	- Test create Post -> needs general/default char/game/cat(?) handling
 	- Feedback (includes errors)
+	- Info bubble for links/games/char
 - Deployement
 	- Iaas
 		- Docker (compose)
 			- nginx1 -> reverse-proxy
 			- nginx2 -> frontend
 			- python-alpine-gunicorn -> backend
+			- postgres -> db
 		- Let's Encrypt/Certbot -> force HTTPS
 		- Gandi -> redirect some seemein.gg subdomain
 		- AWS/GCE/RamNode/DigitalOcean

@@ -58,15 +58,29 @@
             </div>
           </div>
           <div class="field">
-            <label class="label">Links</label>
+            <label class="label">
+              Links
+              <div class="dropdown is-hoverable is-up">
+                <span class="icon has-text-info dropdown-trigger">
+                  <i class="fas fa-info-circle"/>
+                </span>
+                <div class="dropdown-menu">
+                  <div class="dropdown-content">
+                    <div class="dropdown-item">
+                      Bla
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </label>
             <textarea
               class="textarea"
-              :class="{ 'is-danger': emptyLinks }"
+              :class="{ 'is-danger': validLinks }"
               v-model="urls"
               id="post-form-urls"/>
             <p
               class="help is-danger"
-              v-if="emptyLinks">This field can't be empty</p>
+              v-if="validLinks">{{ linksErrorMsg }}</p>
           </div>
         </section>
         <footer class="modal-card-foot">
@@ -98,6 +112,7 @@ export default {
       charId: '0',
       catIds: '-1',
       urls: '',
+      linksErrorMsg: 'This field can\'t be empty.',
       visible: false
     }
   },
@@ -119,10 +134,13 @@ export default {
     chars: function () {
       return this.games.find((game) => game.id === this.gameId).chars
     },
+    links: function () {
+      return this.urls.trim().split('\n')
+    },
     emptyTitle: function () {
       return this.title.trim() === ''
     },
-    emptyLinks: function () {
+    validLinks: function () {
       return this.urls.trim() === ''
     }
   },
@@ -135,7 +153,7 @@ export default {
         title: this.title.trim(),
         gameId: this.gameId,
         charId: this.charId,
-        urls: this.urls.trim().split('\n'),
+        urls: this.links,
         catIds: this.catIds !== -1 ? [this.catIds] : []
       }
       this.$apollo.mutate({

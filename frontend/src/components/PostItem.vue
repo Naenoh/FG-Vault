@@ -16,7 +16,7 @@
         v-for="link in post.links"
         :key="link.id">
         <a
-        :href="link.url">{{ link.url }}
+        :href="link.url">[{{ formatLink(link.url) }}]
         </a>
       </div>
     </td>
@@ -56,6 +56,9 @@ export default {
     },
     filterCat: function (a) {
       this.$emit('updateCatIds', a.target.dataset.id)
+    },
+    formatLink: function (link) {
+      return link.split('/')[2]
     }
   }
 }

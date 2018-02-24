@@ -4,9 +4,15 @@ import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import VueApollo from 'vue-apollo'
 
+let uri = window.location.origin + '/api/graphql'
+
+if (process.env.NODE_ENV === 'development') {
+  uri = 'http://localhost:5000/graphql'
+}
+
 const httpLink = new HttpLink({
   // You should use an absolute URL here
-  uri: 'http://localhost:5000/graphql'
+  uri: uri
 })
 
 // Create the apollo client

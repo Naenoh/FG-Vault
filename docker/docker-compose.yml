@@ -1,0 +1,26 @@
+version: '2.1'
+
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - "./nginx/nginx/nginx.conf:/etc/nginx/nginx.conf"
+      - "./nginx/nginx/conf.d/default.conf:/etc/nginx/nginx/conf.d/default.conf"
+      - "../frontend/dist:/usr/share/nginx/html"
+    depends_on:
+      - gunicorn
+  postgres:
+    image: postgres:10-alpine
+    env_file: ./postgres/.env
+    volumes:
+      - "../backend/basedata.sql:/usr/share/sql/basedata.sql"
+  gunicorn:
+    build: ../backend
+    env_file: ./gunicorn/.env
+    expose:
+      - "8000"
+    depends_on: 
+      - postgres
+        

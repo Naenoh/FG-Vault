@@ -21,9 +21,6 @@
 ### TODOS
 
 ##### Before beta:
-- Frontend
-	- Test create Post 
-	- Move queries out of code
 - Deployement
 	- Iaas
 		- Docker (compose)
@@ -33,7 +30,7 @@
 			- postgres -> db
 		- Let's Encrypt/Certbot -> force HTTPS
 		- Gandi -> redirect some seemein.gg subdomain
-		- AWS/GCE/RamNode/DigitalOcean
+		- RamNode
 	- PaaS
 		- Heroku
 		- Pythonanywhere(?)

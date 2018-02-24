@@ -71,9 +71,8 @@ class CreatePost(graphene.Mutation):
             db.session.rollback()
             wrongLinks = LinkModel.query.filter(LinkModel.url.in_(links)).all()
             if wrongLinks:
-                error = "The following URL(s) are already used : "
-                error += ",".join([link.url for link in wrongLinks])
-                errors.append(error)
+                msg = "The following URL is already used : "
+                errors += [msg+link.url for link in  wrongLinks]
             if not errors:
                 errors.append("Error while creating post.")
             return CreatePost(ok=False, errors=errors)

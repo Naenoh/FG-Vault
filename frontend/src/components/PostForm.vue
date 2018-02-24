@@ -40,7 +40,8 @@
               <label class="label">Game</label>
               <game-picker
                 :games="games"
-                :game-id.sync="gameId"/>
+                :game-id.sync="gameId"
+                :for-search="false"/>
             </div>
             <div
               v-if="gameId != 0"
@@ -48,13 +49,15 @@
               <label class="label">Character</label>
               <char-picker
                 :chars="chars"
-                :char-id.sync="charId"/>
+                :char-id.sync="charId"
+                :for-search="false"/>
             </div>
             <div class="field column">
               <label class="label">Category</label>
               <cat-picker
                 :categories="categories"
-                :cat-ids.sync="catIds"/>
+                :cat-ids.sync="catIds"
+                :for-search="false"/>
             </div>
           </div>
           <div class="field">
@@ -63,13 +66,13 @@
               for="post-form-urls">
               Links
               <div class="dropdown is-hoverable is-up">
-                <span class="icon has-text-info dropdown-trigger">
-                  <i class="fas fa-info-circle"/>
+                <span class="is-rounded tag is-unselectable is-info dropdown-trigger">
+                  ?
                 </span>
                 <div class="dropdown-menu">
                   <div class="dropdown-content">
                     <div class="dropdown-item">
-                      Bla
+                      One link per line.
                     </div>
                   </div>
                 </div>
@@ -77,18 +80,21 @@
             </label>
             <textarea
               class="textarea"
-              :class="{ 'is-danger': validLinks }"
+              :class="{ 'is-danger': invalidLinks }"
               v-model="urls"
               id="post-form-urls"/>
-            <p
-              class="help is-danger"
-              v-if="validLinks">{{ linksErrorMsg }}</p>
+            <div v-if="invalidLinks">
+              <span
+                class="help is-danger"
+                v-for="(error,index) in linksErrorMsgs"
+                :key="index"> {{ error }}</span>
+            </div>
           </div>
         </section>
         <footer class="modal-card-foot">
           <button
             class="button is-success"
-            :disabled="emptyTitle || emptyLinks"
+            :disabled="emptyTitle || invalidLinks"
             @click="submitPost">Create</button>
           <button
             class="button"
@@ -104,18 +110,19 @@ import gql from 'graphql-tag'
 import CatPicker from './CatPicker.vue'
 import GamePicker from './GamePicker.vue'
 import CharPicker from './CharPicker.vue'
+import validUrl from 'valid-url'
 
 export default {
   name: 'PostForm',
   data: function () {
     return {
       title: '',
-      gameId: '0',
-      charId: '0',
+      gameId: '1',
+      charId: '1',
       catIds: '-1',
       urls: '',
-      linksErrorMsg: 'This field can\'t be empty.',
-      visible: false
+      visible: false,
+      externalLinkErrors: []
     }
   },
   props: {
@@ -134,7 +141,11 @@ export default {
   },
   computed: {
     chars: function () {
-      return this.games.find((game) => game.id === this.gameId).chars
+      if (this.games.length !== 0) {
+        console.log(this.games)
+        return this.games.find((game) => game.id === this.gameId).chars
+      }
+      return []
     },
     links: function () {
       return this.urls.trim().split('\n')
@@ -142,13 +153,29 @@ export default {
     emptyTitle: function () {
       return this.title.trim() === ''
     },
-    validLinks: function () {
-      return this.urls.trim() === ''
+    invalidLinks: function () {
+      return this.linksErrorMsgs.length !== 0
+    },
+    linksErrorMsgs: function () {
+      const errors = []
+      if (this.urls.trim() === '') {
+        errors.push('This field can\'t be empty')
+      } else {
+        this.links.map(function (link) {
+          if (!validUrl.isWebUri(link)) {
+            errors.push('This URL isn\'t valid: ' + link)
+          }
+        })
+      }
+      errors.push(...this.externalLinkErrors)
+      return errors
     }
   },
   methods: {
     toggleModal () {
       this.visible = !this.visible
+      this.gameId = '1'
+      this.charId = '1'
     },
     submitPost () {
       const newPost = {
@@ -162,7 +189,7 @@ export default {
         mutation: gql`mutation createPost($title: String, $gameId: Int, $charId: Int, $categoriesId: [Int], $links: [String]){
                         createPost(title: $title, gameId: $gameId, charId: $charId, categoriesId: $categoriesId, links: $links) {
                            ok
-                           post{id title game{name} char{name} links{url} categories{name}}
+                           post{title game{id name} char{id name} categories{id name} links{url}}
                            errors
                         }
                       }`,
@@ -173,19 +200,26 @@ export default {
           categoriesId: newPost.catIds,
           links: newPost.urls
         }
-      }).then(response => {
+      }).then((response) => {
         const data = response.data.createPost
         if (data.ok) {
           console.log('Post successfully added.')
+          this.$apollo.provider.defaultClient.resetStore()
           this.toggleModal()
         } else {
-          data.errors.map(err => {
-            console.error(err)
-          })
+          this.externalLinkErrors.push(...data.errors)
         }
-      }).catch(error => {
+      }).catch(function (error) {
         console.error(error)
       })
+    }
+  },
+  watch: {
+    urls: function () {
+      this.externalLinkErrors = []
+    },
+    gameId: function () {
+      this.charId = this.chars[0].id
     }
   },
   components: { GamePicker, CharPicker, CatPicker }

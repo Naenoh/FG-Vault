@@ -2,7 +2,9 @@
   <div class="char-picker">
     <div class="select">
       <select v-model="charIdC">
-        <option value=-1>Any</option>
+        <option
+          v-if="forSearch"
+          value=-1>Any</option>
         <option
           v-for="char in chars"
           :value="char.id"
@@ -27,7 +29,13 @@ export default {
     charId: {
       type: String,
       default: function () {
-        return '-1'
+        return '1'
+      }
+    },
+    forSearch: {
+      type: Boolean,
+      default: function () {
+        return true
       }
     }
   },

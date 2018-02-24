@@ -21,12 +21,9 @@
 ### TODOS
 
 ##### Before beta:
-- Backend
-	- General char/game handling
 - Frontend
-	- Test create Post -> needs general/default char/game/cat(?) handling
-	- Feedback (includes errors)
-	- Info bubble for links/games/char
+	- Test create Post 
+	- Move queries out of code
 - Deployement
 	- Iaas
 		- Docker (compose)

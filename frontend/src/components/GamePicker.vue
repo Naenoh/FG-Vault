@@ -2,7 +2,9 @@
   <div class="game-picker">
     <div class="select">
       <select v-model="gameIdC">
-        <option value=-1>Any</option>
+        <option
+          v-if="forSearch"
+          value="-1">Any</option>
         <option
           v-for="game in games"
           :value="game.id"
@@ -27,7 +29,13 @@ export default {
     gameId: {
       type: String,
       default: function () {
-        return '-1'
+        return '1'
+      }
+    },
+    forSearch: {
+      type: Boolean,
+      default: function () {
+        return true
       }
     }
   },

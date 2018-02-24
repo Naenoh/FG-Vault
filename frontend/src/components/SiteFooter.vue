@@ -16,5 +16,6 @@ export default {
 <style scoped>
   .site-footer{
     text-align: center;
+    margin-top: 10px;
   }
 </style>

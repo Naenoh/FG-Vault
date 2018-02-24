@@ -1,7 +1,7 @@
 <template>
   <div class="select cat-picker">
     <select v-model="catIdsC">
-      <option value=-1>None</option>
+      <option value=-1>{{ forSearch ? 'Any' : 'None' }}</option>
       <option
         v-for="cat in categories"
         :value="cat.id"
@@ -26,6 +26,12 @@ export default {
       type: String,
       default: function () {
         return '-1'
+      }
+    },
+    forSearch: {
+      type: Boolean,
+      default: function () {
+        return true
       }
     }
   },

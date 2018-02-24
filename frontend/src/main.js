@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import {apolloProvider} from './apolloclient'
-import 'bulma/css/bulma.css'
+import './assets/style.sass'
 
 Vue.config.productionTip = false
 

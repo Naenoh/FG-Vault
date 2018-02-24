@@ -44,7 +44,8 @@
         <div class="control">
           <cat-picker
             :categories="allCategories"
-            :cat-ids.sync="catIds"/>
+            :cat-ids.sync="catIds"
+            :for-search="true"/>
         </div>
       </div>
       <div
@@ -57,7 +58,9 @@
         </button>
       </div>
     </div>
-    <table class="table is-hoverable is-fullwidth">
+    <table
+      v-if="!noResults"
+      class="table is-hoverable is-fullwidth">
       <post-header/>
       <tbody>
         <post-item
@@ -69,6 +72,13 @@
           @updateCatIds="updateCatIds"/>
       </tbody>
     </table>
+    <div
+      v-if="noResults"
+      class="message is-danger">
+      <div class="message-body">
+        No results founds. Try broadening your query or adding new posts.
+      </div>
+    </div>
   </div>
 </template>
 
@@ -93,7 +103,7 @@ export default {
        }`,
       variables () {
         return {
-          title: this.title,
+          title: this.title.trim(),
           gameId: this.gameId,
           charId: this.charId,
           catIds: this.catIds !== '-1' ? [this.catIds] : []
@@ -149,6 +159,9 @@ export default {
       }
       return !(JSON.stringify(this.baseData) === JSON.stringify(currentData))
     },
+    noResults: function () {
+      return !this.filteredPosts.posts || this.filteredPosts.posts.length === 0
+    },
     chars: function () {
       return this.allGames.find((game) => game.id === this.gameId).chars
     }
@@ -166,3 +179,9 @@ export default {
 }
 
 </script>
+
+<style scoped>
+  .post-list{
+    flex: 1;
+  }
+</style>

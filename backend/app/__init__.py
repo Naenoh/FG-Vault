@@ -13,7 +13,7 @@ if os.environ.get('ENV','') == 'production':
                                                                                  os.environ['POSTGRES_DB_PORT'],
                                                                                  os.environ['POSTGRES_DB_NAME'])
 else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://fgctechuser:fgctechpass10@127.0.0.2:5431/fgctech'  # TODO hide this
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://fgctechuser:fgctechpass10@127.0.0.1:5432/fgctech'  # TODO hide this
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 

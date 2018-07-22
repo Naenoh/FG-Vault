@@ -5,7 +5,7 @@
         <button
           class="button is-primary"
           @click="toggleModal">
-          Create post
+          Add links
         </button>
       </div>
     </div>
@@ -17,7 +17,7 @@
         @click="toggleModal"/>
       <div class="modal-card">
         <header class="modal-card-head">
-          <p class="modal-card-title">Create post</p>
+          <p class="modal-card-title">Add links</p>
           <button
             class="delete"
             aria-label="close"
@@ -52,12 +52,28 @@
                 :char-id.sync="charId"
                 :for-search="false"/>
             </div>
-            <div class="field column">
-              <label class="label">Category</label>
+
+          </div>
+          <label class="label">Category</label>
+          <div class="field is-grouped is-grouped-multiline">
+            <div class="control">
               <cat-picker
-                :categories="categories"
-                :cat-ids.sync="catIds"
-                :for-search="false"/>
+              :categories="categories"
+              :cat-ids.sync="catIds"
+              :for-search="false"/>
+            </div>
+            <div
+              class="control"
+              v-for="pickedCat in catArray">
+              <div class="tags has-addons">
+                <span
+                  class="tag is-medium">{{ getCat(pickedCat).name }}
+                </span>
+                <a
+                  class="tag is-medium is-delete"
+                  @click="removeCat(getCat(pickedCat).id)"
+                  :data-id="getCat(pickedCat).id"></a>
+              </div>
             </div>
           </div>
           <div class="field">
@@ -90,12 +106,22 @@
                 :key="index"> {{ error }}</span>
             </div>
           </div>
+          <div class="field">
+            <label
+              class="label"
+              for="post-form-urls">
+              Description
+              <textarea
+                class="textarea"
+                v-model="description"/>
+            </label>
+          </div>
         </section>
         <footer class="modal-card-foot">
           <button
             class="button is-success"
             :disabled="emptyTitle || invalidLinks"
-            @click="submitPost">Create</button>
+            @click="submitPost">Add</button>
           <button
             class="button"
             @click="toggleModal">Cancel</button>
@@ -117,9 +143,11 @@ export default {
   data: function () {
     return {
       title: '',
+      description: '',
       gameId: '1',
       charId: '1',
       catIds: '-1',
+      catArray: [],
       urls: '',
       visible: false,
       externalLinkErrors: []
@@ -174,22 +202,32 @@ export default {
   methods: {
     toggleModal () {
       this.visible = !this.visible
-      this.gameId = '1'
-      this.charId = '1'
+      this.title = ''
+      this.description = ''
+      this.urls = ''
+      this.catIds = '-1'
+      this.catArray = []
+    },
+    getCat (id) {
+      return this.categories[parseInt(id) - 1]
+    },
+    removeCat (id) {
+      this.catArray.splice(this.catArray.indexOf(id), 1)
     },
     submitPost () {
       const newPost = {
         title: this.title.trim(),
+        description: this.description.trim(),
         gameId: this.gameId,
         charId: this.charId,
         urls: this.links,
-        catIds: this.catIds !== -1 ? [this.catIds] : []
+        catIds: this.catArray
       }
       this.$apollo.mutate({
-        mutation: gql`mutation createPost($title: String, $gameId: Int, $charId: Int, $categoriesId: [Int], $links: [String]){
-                        createPost(title: $title, gameId: $gameId, charId: $charId, categoriesId: $categoriesId, links: $links) {
+        mutation: gql`mutation createPost($title: String, $description: String, $gameId: Int, $charId: Int, $categoriesId: [Int], $links: [String]){
+                        createPost(title: $title, description: $description, gameId: $gameId, charId: $charId, categoriesId: $categoriesId, links: $links) {
                            ok
-                           post{title game{id name} char{id name} categories{id name} links{url}}
+                           post{title description game{id name} char{id name} categories{id name} links{url}}
                            errors
                         }
                       }`,
@@ -198,7 +236,8 @@ export default {
           gameId: newPost.gameId,
           charId: newPost.charId,
           categoriesId: newPost.catIds,
-          links: newPost.urls
+          links: newPost.urls,
+          description: newPost.description
         }
       }).then((response) => {
         const data = response.data.createPost
@@ -220,6 +259,11 @@ export default {
     },
     gameId: function () {
       this.charId = this.chars[0].id
+    },
+    catIds: function () {
+      if (this.catIds !== '-1' && this.catArray.indexOf(this.catIds) === -1) {
+        this.catArray.push(this.catIds)
+      }
     }
   },
   components: { GamePicker, CharPicker, CatPicker }

@@ -1,6 +1,15 @@
 <template>
-  <tr class="post-item">
-    <td>{{ post.title }}</td>
+  <tr
+    class="post-item"
+    @click="toggleDesc">
+    <td>
+      <div>{{ post.title }}</div>
+      <div
+        v-if="post.description"
+        :hidden="descHidden"
+        style="white-space: pre-line"
+        class="is-size-7"><br> {{ post.description }}</div>
+    </td>
     <td>
       <a
         class="tag"
@@ -32,7 +41,6 @@
         </a>
       </div>
     </td>
-
   </tr>
 </template>
 
@@ -47,6 +55,11 @@ export default {
       }
     }
   },
+  data: function () {
+    return {
+      descHidden: true
+    }
+  },
   methods: {
     filterGame: function () {
       this.$emit('updateGameId', this.post.game.id)
@@ -59,6 +72,11 @@ export default {
     },
     formatLink: function (link) {
       return link.split('/')[2]
+    },
+    toggleDesc: function (a) {
+      if (!a.target.classList.contains('tag')) {
+        this.descHidden = !this.descHidden
+      }
     }
   }
 }

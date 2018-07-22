@@ -150,11 +150,14 @@ INSERT INTO categories (name) VALUES
   ('MU'),
   ('Misc.');
 
-INSERT INTO posts (title, game_id, char_id) VALUES
-  ('Sol BNBs', 2, 25),
-  ('Sol Framedata', 2, 25),
-  ('Feng BNBs', 3, 38),
-  ('Tsubaki BNBs', 5, 122);
+INSERT INTO posts (title, description,  game_id, char_id) VALUES
+  ('Sol BNBs', 'List of bnbs', 2, 25),
+  ('Sol Framedata','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae sodales risus. Aliquam ac porttitor lectus, pharetra molestie urna. Donec pellentesque maximus aliquet. Phasellus consectetur volutpat mattis. Aliquam lacinia, massa quis iaculis sagittis, diam odio pulvinar augue, eu tristique tellus velit ut risus. Mauris placerat imperdiet tincidunt. Duis ornare finibus neque, eget rhoncus justo facilisis at. Nulla efficitur auctor metus, sit amet sollicitudin odio pharetra a. Sed sodales tristique mi, eget accumsan risus lobortis id. Sed pulvinar libero ex, sit amet consectetur erat consectetur eget. Phasellus ullamcorper magna non diam congue sodales. Nullam eu mi fermentum, pretium odio vitae, gravida eros. Suspendisse malesuada sem nisl, eu accumsan velit posuere in. Curabitur nec urna volutpat, tempor ante facilisis, scelerisque purus. Vivamus in nisl ut velit mollis gravida.Suspendisse turpis turpis, condimentum in dui a, dictum porttitor velit. Maecenas posuere tortor eget tempus pellentesque. Pellentesque tempor eros ut auctor ultrices. Ut nec est ac elit vulputate imperdiet. Pellentesque eleifend consequat turpis ut vulputate. Donec magna nulla, tempor sed placerat ac, efficitur et nunc. Mauris hendrerit rutrum congue. Quisque eros sapien, laoreet eu imperdiet ut, lacinia non urna. Duis consequat eros ut lacus fringilla eleifend. Sed dui risus, facilisis a sodales sed, maximus vitae velit. Nam aliquam diam at ex mattis, quis blandit libero luctus cras amet. ', 2, 25),
+  ('Feng BNBs','blabla' ||
+               'blabli' ||
+               'blibla' ||
+               'hehehhe', 3, 38),
+  ('Tsubaki BNBs','test\nhueuiad\nduiygsqudq\ndusqhidisq', 5, 122);
 
 INSERT INTO cats (post_id, category_id) VALUES
   (1,2),

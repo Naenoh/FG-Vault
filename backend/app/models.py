@@ -35,6 +35,7 @@ class Post(db.Model):
     __tablename__ = 'posts'
     id = Column(Integer, primary_key=True)
     title = Column(String(255))
+    description = Column(String(10000))
     game_id = Column(Integer, ForeignKey('games.id'))
     game = relationship('Game', backref='posts')
     char_id = Column(Integer, ForeignKey('chars.id'))

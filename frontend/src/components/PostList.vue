@@ -73,6 +73,19 @@
       </tbody>
     </table>
     <div
+      v-if="!noResults"
+      class="buttons has-addons is-centered">
+      <button
+        :disabled="page === 1"
+        class="button"
+        @click="page--"><</button>
+      <button class="button is-static">{{ page }} / {{ filteredPosts.lastPage }}</button>
+      <button
+        :disabled="page === filteredPosts.lastPage"
+        class="button"
+        @click="page++">></button>
+    </div>
+    <div
       v-if="noResults"
       class="message is-danger">
       <div class="message-body">
@@ -98,15 +111,16 @@ export default {
     allGames: gql`{allGames{id name chars{id name}}}`,
     allCategories: gql`{allCategories{id name}}`,
     filteredPosts: {
-      query: gql`query getFilteredPosts($title: String, $gameId: Int, $charId: Int, $catIds: [Int]){
-          filteredPosts(title:$title,gameId:$gameId,charId:$charId, catIds:$catIds){posts{title game{id name} char{id name} categories{id name} links{url}}}
+      query: gql`query getFilteredPosts($page: Int, $title: String, $gameId: Int, $charId: Int, $catIds: [Int]){
+          filteredPosts(page: $page, title:$title,gameId:$gameId,charId:$charId, catIds:$catIds){posts{title description game{id name} char{id name} categories{id name} links{url}} lastPage}
        }`,
       variables () {
         return {
           title: this.title.trim(),
           gameId: this.gameId,
           charId: this.charId,
-          catIds: this.catIds !== '-1' ? [this.catIds] : []
+          catIds: this.catIds !== '-1' ? [this.catIds] : [],
+          page: this.page
         }
       }
     }
@@ -120,6 +134,7 @@ export default {
       gameId: '-1',
       charId: '-1',
       catIds: '-1',
+      page: 1,
       baseData: {
         title: '',
         gameId: '-1',
@@ -144,6 +159,7 @@ export default {
       this.gameId = '-1'
       this.charId = '-1'
       this.catIds = '-1'
+      this.page = 1
     },
     debounceTitle: debounce(function (e) {
       this.title = e.target.value

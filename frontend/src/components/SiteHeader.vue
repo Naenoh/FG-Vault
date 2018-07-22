@@ -2,8 +2,8 @@
   <div class="site-header">
     <div class="top-line"/>
     <div class="title-cont">
-      <p class="title is-1">FGTD</p>
-      <p class="subtitle">A Fighting Game Tech Directory</p>
+      <p class="title is-1">FGLD</p>
+      <p class="subtitle">A Fighting Game Links Directory<br>Note : Posts added during the beta might not be kept.</p>
     </div>
   </div>
 </template>

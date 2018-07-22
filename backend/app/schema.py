@@ -36,6 +36,7 @@ class Char(SQLAlchemyObjectType):
 class CreatePost(graphene.Mutation):
     class Arguments:
         title = graphene.String()
+        description = graphene.String()
         game_id = graphene.Int()
         char_id = graphene.Int()
         categories_id = graphene.List(graphene.Int)
@@ -45,11 +46,13 @@ class CreatePost(graphene.Mutation):
     post = graphene.Field(Post)
     errors = graphene.List(graphene.String)
 
-    def mutate(self, info, title, game_id, char_id, categories_id, links):
+    def mutate(self, info, title, description, game_id, char_id, categories_id, links):
         title = title.strip()
         errors = []
         if title == '':
             errors.append("Title can't be empty.")
+        if len(description) > 10000:
+            errors.append("The description is too long (max 10000 chars).")
         validurls = True
         for link in links:
             validurls = validurls and validators.url(link)
@@ -60,7 +63,7 @@ class CreatePost(graphene.Mutation):
         if errors:
             return CreatePost(ok=False, errors=errors)
         try:
-            newpost = PostModel(title=title, game_id=game_id, char_id=char_id, associations_ids=categories_id)
+            newpost = PostModel(title=title, description=description, game_id=game_id, char_id=char_id, associations_ids=categories_id)
             for link in links:
                 db.session.add(LinkModel(url=link, post=newpost))
             db.session.commit()
@@ -164,6 +167,7 @@ class Mutations(graphene.ObjectType):
 class FilteredPosts(graphene.ObjectType):
     posts = graphene.List(Post)
     size = graphene.Int()
+    last_page = graphene.Int()
 
 
 class Query(graphene.ObjectType):
@@ -171,6 +175,7 @@ class Query(graphene.ObjectType):
     all_games = graphene.List(Game)
     all_categories = graphene.List(Category)
     filtered_posts = graphene.Field(FilteredPosts,
+                                    page=graphene.Int(default_value=1),
                                     title=graphene.String(default_value=""),
                                     game_id=graphene.Int(default_value=-1),
                                     char_id=graphene.Int(default_value=-1),
@@ -185,17 +190,19 @@ class Query(graphene.ObjectType):
     def resolve_all_categories(self, info):
         return CategoryModel.query.all()
 
-    def resolve_filtered_posts(self, info, title, game_id, char_id, cat_ids):
+    def resolve_filtered_posts(self, info, page, title, game_id, char_id, cat_ids):
         terms = title.split(" ")
         regexp = "(?=.*" + ")(?=.*".join(terms) + ")"
-        current_query = PostModel.query.filter(text("title ~* :regexp")).params(regexp=regexp)
+        current_query = PostModel.query.filter(text("title ~* :regexp")).params(regexp=regexp).order_by(PostModel.id.desc())
         if char_id != -1:
             current_query = current_query.filter(PostModel.char_id == char_id)
         if game_id != -1:
             current_query = current_query.filter(PostModel.game_id == game_id)
         if cat_ids != [None] and cat_ids:
             current_query = current_query.join(PostModel.categories).filter(CategoryModel.id.in_(cat_ids))
-        return FilteredPosts(posts=reversed(current_query.all()), size=current_query.count())
+        pages = current_query.paginate(page, 25, False)
+        return FilteredPosts(posts=pages.items, size=pages.total, last_page=pages.pages)
+        # return FilteredPosts(posts=reversed(current_query.all()), size=current_query.count())
 
 
 schema = graphene.Schema(query=Query, mutation=Mutations)

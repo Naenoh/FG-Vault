@@ -23,18 +23,10 @@
 ##### Before beta:
 - Deployement
 	- Iaas
-		- Docker (compose)
-			- nginx1 -> reverse-proxy
-			- nginx2 -> frontend
-			- python-alpine-gunicorn -> backend
-			- postgres -> db
 		- Let's Encrypt/Certbot -> force HTTPS
 		- Gandi -> redirect some seemein.gg subdomain
 		- RamNode
-	- PaaS
-		- Heroku
-		- Pythonanywhere(?)
-
+	
 ##### Later:
 
 - Finish search 

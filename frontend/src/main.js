@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import {apolloProvider} from './apolloclient'
-import './assets/style.sass'
+import('./assets/style.sass')
 
 Vue.config.productionTip = false
 
@@ -12,5 +12,5 @@ new Vue({
   el: '#app',
   components: { App },
   template: '<App/>',
-  apolloProvider
+  provide: apolloProvider.provide()
 })

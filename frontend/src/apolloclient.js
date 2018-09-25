@@ -7,7 +7,7 @@ import VueApollo from 'vue-apollo'
 let uri = window.location.origin + '/api/graphql'
 
 if (process.env.NODE_ENV === 'development') {
-  uri = 'http://localhost:5000/graphql'
+  uri = 'http://127.0.0.1:5000/graphql'
 }
 
 const httpLink = new HttpLink({

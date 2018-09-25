@@ -171,7 +171,6 @@ export default {
   computed: {
     chars: function () {
       if (this.games.length !== 0) {
-        console.log(this.games)
         return this.games.find((game) => game.id === this.gameId).chars
       }
       return []

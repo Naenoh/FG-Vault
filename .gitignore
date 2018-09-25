@@ -3,3 +3,4 @@
 *.pyc
 bleh
 .vscode
+npm-debug.log

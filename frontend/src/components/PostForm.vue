@@ -58,21 +58,22 @@
           <div class="field is-grouped is-grouped-multiline">
             <div class="control">
               <cat-picker
-              :categories="categories"
-              :cat-ids.sync="catIds"
-              :for-search="false"/>
+                :categories="categories"
+                :cat-ids.sync="catIds"
+                :for-search="false"/>
             </div>
             <div
               class="control"
-              v-for="pickedCat in catArray">
+              v-for="pickedCat in catArray"
+              :key="pickedCat.id">
               <div class="tags has-addons">
-                <span
-                  class="tag is-medium">{{ getCat(pickedCat).name }}
+                <span class="tag is-medium">
+                  {{ getCat(pickedCat).name }}
                 </span>
                 <a
                   class="tag is-medium is-delete"
                   @click="removeCat(getCat(pickedCat).id)"
-                  :data-id="getCat(pickedCat).id"></a>
+                  :data-id="getCat(pickedCat).id" />
               </div>
             </div>
           </div>

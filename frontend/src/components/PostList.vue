@@ -78,12 +78,12 @@
       <button
         :disabled="page === 1"
         class="button"
-        @click="page--"><</button>
+        @click="page--">&lt;</button>
       <button class="button is-static">{{ page }} / {{ filteredPosts.lastPage }}</button>
       <button
         :disabled="page === filteredPosts.lastPage"
         class="button"
-        @click="page++">></button>
+        @click="page++">&gt;</button>
     </div>
     <div
       v-if="noResults"

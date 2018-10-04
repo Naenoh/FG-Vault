@@ -23,7 +23,8 @@
     "lodash.debounce": "^4.0.8",
     "valid-url": "^1.0.9",
     "vue": "^2.5.2",
-    "vue-apollo": "^3.0.0-alpha.3"
+    "vue-apollo": "^3.0.0-alpha.3",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

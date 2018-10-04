@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-
+    <h1>HELLO {{ this.$route.path }}</h1>
   </div>
 </template>
 

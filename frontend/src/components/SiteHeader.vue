@@ -3,7 +3,8 @@
     <div class="top-line"/>
     <div class="title-cont">
       <p class="title is-1">FGLD</p>
-      <p class="subtitle">A Fighting Game Links Directory<br>Note : Posts added during the beta might not be kept.</p>
+      <p class="subtitle">A Fighting Game Links Directory</p>
+      <p class="subtitle">{{ this.$route.query }}</p>
     </div>
   </div>
 </template>

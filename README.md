@@ -16,24 +16,23 @@
 ### Stack
 
 - Flask/SQLAlchemy/Graphene(GraphQL)/Postgres
-- Vue
+- Vue/Apollo(GraphQL)/Bulma
 
 ### TODOS
 
-##### Before beta:
-- Deployement
-	- Iaas
-		- Let's Encrypt/Certbot -> force HTTPS
-		- Gandi -> redirect some seemein.gg subdomain
-		- RamNode
-	
-##### Later:
+##### Before release
 
-- Finish search 
-	- Multiple categories LATER
-- Finish Submit 
-	- Multiple categories LATER
-- Pagination
+- Add backspace functionnality
+- Add loading indicator
+- Add a way to hint at descriptions
+- check/work on responsiveness
+- Clean up code
+- Unit tests 
+- Rework deployement
+- Find a way to do migrations
+- Find final name
+- Fill default database
+- Buy domain and point VPS
 
 ### Issues
 

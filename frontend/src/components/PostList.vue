@@ -11,7 +11,7 @@
         <div class="control">
           <input
             class="input"
-            @input="debounceTitle"
+            v-model="title"
             id="post-search-input">
         </div>
       </div>
@@ -103,7 +103,6 @@ import CatPicker from './CatPicker.vue'
 import GamePicker from './GamePicker.vue'
 import CharPicker from './CharPicker.vue'
 import gql from 'graphql-tag'
-import debounce from 'lodash.debounce'
 
 export default {
   name: 'PostList',
@@ -122,7 +121,11 @@ export default {
           catIds: this.catIds !== '-1' ? [this.catIds] : [],
           page: this.page
         }
-      }
+      },
+      result () {
+        this.updateRoute()
+      },
+      debounce: 200
     }
   },
   data () {
@@ -161,9 +164,19 @@ export default {
       this.catIds = '-1'
       this.page = 1
     },
-    debounceTitle: debounce(function (e) {
-      this.title = e.target.value
-    }, 200)
+    updateRoute: function () {
+      this.$router.push(
+        {
+          path: '',
+          query: {
+            title: this.title !== this.baseData.title ? this.title : undefined,
+            gameId: this.gameId !== this.baseData.gameId ? this.gameId : undefined,
+            charId: this.charId !== this.baseData.charId ? this.charId : undefined,
+            catIds: this.catIds !== this.baseData.catIds ? this.catIds : undefined
+          }
+        }
+      )
+    }
   },
   computed: {
     isFiltered: function () {

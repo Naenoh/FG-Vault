@@ -22,7 +22,7 @@
 
 ##### Before release
 
-- Add backspace functionnality
+- improve backspace functionnality
 - Add loading indicator
 - Add a way to hint at descriptions
 - check/work on responsiveness

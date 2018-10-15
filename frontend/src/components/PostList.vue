@@ -176,6 +176,12 @@ export default {
           }
         }
       )
+    },
+    updateData: function () {
+      this.title = this.$route.query.title || ''
+      this.gameId = this.$route.query.gameId || '-1'
+      this.charId = this.$route.query.charId || '-1'
+      this.catIds = this.$route.query.catIds || '-1'
     }
   },
   computed: {
@@ -202,6 +208,9 @@ export default {
           this.charId = '-1'
         }
       }
+    },
+    '$route' (to, from) {
+      this.updateData()
     }
   },
   components: { PostItem, PostHeader, PostForm, CatPicker, GamePicker, CharPicker }

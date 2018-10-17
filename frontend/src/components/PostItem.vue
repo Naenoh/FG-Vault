@@ -7,8 +7,11 @@
       <div
         v-if="post.description"
         :hidden="descHidden"
-        style="white-space: pre-line"
-        class="is-size-7"><br> {{ post.description }}</div>
+        class="is-size-7 desc"><br> {{ post.description }}</div>
+      <div
+        v-if="post.description"
+        :hidden="!descHidden"
+        class="is-size-7 desc-preview">{{ post.description }}</div>
     </td>
     <td>
       <a
@@ -81,3 +84,13 @@ export default {
   }
 }
 </script>
+<style>
+.desc {
+  white-space: pre-line;
+}
+.desc-preview {
+  opacity: 0.2;
+  max-height: 1.7rem;
+  overflow: hidden;
+}
+</style>

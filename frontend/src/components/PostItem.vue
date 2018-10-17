@@ -28,7 +28,7 @@
         v-for="link in post.links"
         :key="link.id">
         <a
-          :href="link.url">[{{ formatLink(link.url) }}]
+        :href="link.url">[{{ formatLink(link.url) }}]
         </a>
       </div>
     </td>

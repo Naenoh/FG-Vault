@@ -63,7 +63,9 @@
       class="table is-hoverable is-fullwidth">
       <post-header/>
       <tbody>
+        <div v-if="!isLoading">Loading...</div>
         <post-item
+          v-if="!isLoading"
           v-for="post in filteredPosts.posts"
           :post="post"
           :key="post.id"
@@ -123,9 +125,12 @@ export default {
         }
       },
       result () {
-        this.updateRoute()
+        if (!this.querySynced()) {
+          this.updateRoute()
+        }
       },
-      debounce: 200
+      debounce: 200,
+      loadingKey: 'loadingCount'
     }
   },
   data () {
@@ -143,7 +148,8 @@ export default {
         gameId: '-1',
         charId: '-1',
         catIds: '-1'
-      }
+      },
+      loadingCount: 0
     }
   },
   methods: {
@@ -163,6 +169,12 @@ export default {
       this.charId = '-1'
       this.catIds = '-1'
       this.page = 1
+    },
+    querySynced: function () {
+      return this.title === (this.$route.query.title || '') &&
+        this.gameId === (this.$route.query.gameId || '-1') &&
+        this.charId === (this.$route.query.charId || '-1') &&
+        this.catIds === (this.$route.query.catIds || '-1')
     },
     updateRoute: function () {
       this.$router.push(
@@ -185,6 +197,9 @@ export default {
     }
   },
   computed: {
+    isLoading: function () {
+      return this.loadingCount > 0
+    },
     isFiltered: function () {
       const currentData = {
         title: this.title,
@@ -210,7 +225,9 @@ export default {
       }
     },
     '$route' (to, from) {
-      this.updateData()
+      if (!this.querySynced()) {
+        this.updateData()
+      }
     }
   },
   components: { PostItem, PostHeader, PostForm, CatPicker, GamePicker, CharPicker }

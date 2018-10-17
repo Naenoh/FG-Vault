@@ -22,8 +22,8 @@
 
 ##### Before release
 
-- improve backspace functionnality
-- Add loading indicator
+- Group filters, rework base values handling
+- Add loading indicator (doesnt work well ?)
 - check/work on responsiveness
 - Clean up code
 - Unit tests 

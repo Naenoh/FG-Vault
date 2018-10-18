@@ -1,0 +1,237 @@
+# General
+#Guilty Gear Xrd: Rev2
+Answer
+Axl
+Baiken
+Bedman
+Chipp
+Dizzy
+Elphelt
+Faust
+I-No
+Jack-O
+Jam
+Johnny
+Kum
+Ky
+Leo
+May
+Millia
+Potemkin
+Ramlethal
+Raven
+Sin
+Slayer
+Sol
+Venom
+Zato-1
+#Tekken 7
+Akuma
+Alisa
+Asuka
+Bob
+Claudio
+Devil Jin
+Dragunov
+Eddy 
+Eliza
+Feng
+Geese
+Gigas
+Heihachi
+Hwoarang
+Jack-7
+Jin
+Josie 
+Katarina
+King
+Kazuya
+Kazumi
+Kuma
+Lars
+Lee
+Lili 
+Leo
+Lucky Chloe
+Law
+Master Raven
+Miguel
+Nina
+Paul
+Panda 
+Shaheen
+Steve
+Xiaoyu
+Yoshimitsu
+Noctis
+Anna
+Lei
+#Dragonball FighterZ
+Android 16
+Android 18
+Android 21
+Beerus
+Ginyu
+Cell
+Frieza
+Gohan Adult
+Gohan Teen
+Goku SSB
+Goku SSJ
+Goku Black
+Gotenks
+Hit
+Piccolo
+Kid Buu
+Krillin
+Majin Buu
+Nappa
+Tien
+Trunks
+Vegeta SSJ
+Vegeta SSB
+Yamcha
+Bardock
+Broly
+Zamasu
+Vegito
+Goku Base
+Vegeta Base
+Android 17
+Cooler
+#Blazblue: Central Fiction
+Amane
+Arakune
+Azrael
+Bang
+Bullet
+Carl
+Celica
+Es
+Hakumen
+Hazama
+Hibiki
+Tager
+Izanami
+Izayoi
+Jin
+Jubei
+Kagura
+Kokonoe
+Litchi
+Mai
+Makoto
+Naoto
+Nine
+Noel
+Platinum
+Rachel
+Ragna
+Relius
+Susanoo
+Taokaka
+Tsubaki
+Valkenhayn
+Yuuki
+Λ-11
+μ-12
+ν-13
+#SoulCalibur VI
+Astaroth
+Azwell
+Cervantes
+Geralt de Riv
+Grøh
+Inferno
+Ivy
+Kilik
+Maxi
+Mitsurugi
+Nightmare
+Raphael
+Seong Mi-Na
+Siegfried
+Sophitia
+Taki
+Talim
+Tira
+Voldo
+Xianghua
+Yoshimitsu
+Zasalamel
+#Street Fighter V
+Birdie
+Cammy
+Chun-Li
+Dhalsim
+F.A.N.G
+Karin
+Ken
+Laura
+M. Bison
+Nash
+Necalli
+R. Mika
+Rashid
+Ryu
+Vega
+Zangief
+Alex
+Balrog
+Guile
+Ibuki
+Juri
+Urien
+Abigail
+Akuma
+Ed
+Kolin
+Menat
+Zeku
+Blanka
+Cody
+Falke
+G
+Sagat
+Sakura
+#BlazBlue: Cross Tag Battle
+Ragna
+Jin
+Noel
+Rachel
+Tager
+Hakumen
+Nu-13
+Hazama
+Makoto
+Platinum
+Izayoi
+Azrael
+Nine
+Es
+Mai
+Jubei
+Yu
+Yosuke
+Chie
+Yukiko
+Kanji
+Naoto
+Mitsuru
+Akihiko
+Aegis
+Labrys
+Hyde
+Linne
+Waldstein
+Carmine
+Orie
+Gordeau
+Merkava
+Vatista
+Yuzuriha
+Mika
+Ruby
+Weiss
+Blake
+Yang

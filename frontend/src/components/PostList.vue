@@ -62,10 +62,9 @@
       v-if="!noResults"
       class="table is-hoverable is-fullwidth">
       <post-header/>
-      <tbody>
-        <div v-if="!isLoading">Loading...</div>
+      <tbody
+        :class="{ 'is-blurred': isLoading}">
         <post-item
-          v-if="!isLoading"
           v-for="post in filteredPosts.posts"
           :post="post"
           :key="post.id"
@@ -238,5 +237,12 @@ export default {
 <style scoped>
   .post-list{
     flex: 1;
+  }
+  .is-blurred{
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
   }
 </style>

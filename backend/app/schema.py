@@ -202,7 +202,6 @@ class Query(graphene.ObjectType):
             current_query = current_query.join(PostModel.categories).filter(CategoryModel.id.in_(cat_ids))
         pages = current_query.paginate(page, 25, False)
         return FilteredPosts(posts=pages.items, size=pages.total, last_page=pages.pages)
-        # return FilteredPosts(posts=reversed(current_query.all()), size=current_query.count())
 
 
 schema = graphene.Schema(query=Query, mutation=Mutations)

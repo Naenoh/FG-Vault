@@ -1,13 +1,11 @@
 <template>
-  <thead>
-    <tr class="post-header">
-      <th>Name</th>
-      <th>Game</th>
-      <th>Character</th>
-      <th>Links</th>
-      <th>Categories</th>
-    </tr>
-  </thead>
+  <header class="post-header has-text-weight-bold columns">
+    <div class="column is-6">Title</div>
+    <div class="column is-2">Game</div>
+    <div class="column is-1">Character</div>
+    <div class="column is-2">Links</div>
+    <div class="column is-1">Categories</div>
+  </header>
 </template>
 
 <script>

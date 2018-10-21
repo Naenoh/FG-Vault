@@ -1,9 +1,9 @@
 <template>
-  <tr
-    class="post-item"
+  <article
+    class="post-item columns"
     @click="toggleDesc">
-    <td>
-      <div>{{ post.title }}</div>
+    <div class="column is-6">
+      <div class="has-text-weight-bold">{{ post.title }}</div>
       <div
         v-if="post.description"
         :hidden="descHidden"
@@ -12,18 +12,18 @@
         v-if="post.description"
         :hidden="!descHidden"
         class="is-size-7 desc-preview">{{ post.description }}</div>
-    </td>
-    <td>
+    </div>
+    <div class="column is-2">
       <a
         class="tag"
         @click="filterGame">{{ post.game.name }}</a>
-    </td>
-    <td>
+    </div>
+    <div class="column is-1">
       <a
         class="tag"
         @click="filterChar">{{ post.char.name }}</a>
-    </td>
-    <td>
+    </div>
+    <div class="column is-2">
       <div
         v-for="link in post.links"
         :key="link.id">
@@ -31,8 +31,8 @@
           :href="link.url">[{{ formatLink(link.url) }}]
         </a>
       </div>
-    </td>
-    <td>
+    </div>
+    <div class="column is-1">
       <div class="tags">
         <a
           v-for="cat in post.categories"
@@ -43,8 +43,8 @@
           {{ cat.name }}
         </a>
       </div>
-    </td>
-  </tr>
+    </div>
+  </article>
 </template>
 
 <script>

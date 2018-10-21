@@ -58,11 +58,11 @@
         </button>
       </div>
     </div>
-    <table
+    <div
       v-if="!noResults"
       class="table is-hoverable is-fullwidth">
       <post-header/>
-      <tbody
+      <div
         :class="{ 'is-blurred': isLoading}">
         <post-item
           v-for="post in filteredPosts.posts"
@@ -71,8 +71,8 @@
           @updateGameId="updateGameId"
           @updateCharId="updateCharId"
           @updateCatIds="updateCatIds"/>
-      </tbody>
-    </table>
+      </div>
+    </div>
     <div
       v-if="!noResults"
       class="buttons has-addons is-centered">

@@ -13,3 +13,8 @@ export default {
   name: 'PostHeader'
 }
 </script>
+<style>
+  .post-header {
+    border-top: 2px solid black;
+  }
+</style>

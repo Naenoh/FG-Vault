@@ -93,4 +93,10 @@ export default {
   max-height: 1.7rem;
   overflow: hidden;
 }
+.post-item {
+  border-top: 1px solid #D3D3D3;
+}
+.post-item:hover {
+  background-color: #F5F5F5;
+}
 </style>

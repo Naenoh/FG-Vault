@@ -3,7 +3,7 @@
     <post-form
       :games="allGames"
       :categories="allCategories"/>
-    <div class="columns is-centered">
+    <div class="columns is-centered post-filters">
       <div class="field has-addons column is-narrow">
         <div class="control">
           <div class="button is-static">Title</div>
@@ -244,5 +244,10 @@ export default {
     -o-filter: blur(5px);
     -ms-filter: blur(5px);
     filter: blur(5px);
+  }
+  @media screen and (max-width: 768px) {
+    .post-filters {
+      margin-left: 0.75rem;
+    }
   }
 </style>

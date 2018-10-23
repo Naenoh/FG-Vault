@@ -1,6 +1,6 @@
 <template>
   <div class="post-form">
-    <div class="columns is-centered">
+    <div class="columns is-centered is-mobile">
       <div class="column is-narrow">
         <button
           class="button is-primary"

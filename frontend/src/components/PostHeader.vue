@@ -16,5 +16,12 @@ export default {
 <style>
   .post-header {
     border-top: 2px solid black;
+    border-bottom: 1px solid black;
+    padding-left: 0.75rem;
+  }
+  @media screen and (max-width: 768px){
+    .post-header {
+      display: none;
+    }
   }
 </style>

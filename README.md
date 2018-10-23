@@ -24,8 +24,6 @@
 
 - Group filters, rework base values handling
 - fix pc/osx differences
-- make items fixed width ?
-- check/work on responsiveness
 - Clean up code
 - Unit tests 
 - Rework deployement

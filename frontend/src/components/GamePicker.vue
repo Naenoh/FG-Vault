@@ -4,7 +4,7 @@
       <select v-model="gameIdC">
         <option
           v-if="forSearch"
-          value="-1">Any</option>
+          :value=undefined>Any</option>
         <option
           v-for="game in games"
           :value="game.id"
@@ -29,7 +29,7 @@ export default {
     gameId: {
       type: String,
       default: function () {
-        return '1'
+        return undefined
       }
     },
     forSearch: {

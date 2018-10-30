@@ -179,7 +179,7 @@ class Query(graphene.ObjectType):
                                     title=graphene.String(default_value=""),
                                     game_id=graphene.Int(default_value=-1),
                                     char_id=graphene.Int(default_value=-1),
-                                    cat_ids=graphene.List(graphene.Int))
+                                    cat_ids=graphene.List(graphene.Int, default_value=[None]))
 
     def resolve_all_posts(self, info):
         return AllPosts(posts=PostModel.query.all())

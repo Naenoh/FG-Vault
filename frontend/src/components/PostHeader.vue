@@ -15,7 +15,7 @@ export default {
 </script>
 <style>
   .post-header {
-    border-top: 2px solid black;
+    border-top: 3px solid #00c4a7;
     border-bottom: 1px solid black;
     padding-left: 0.75rem;
   }

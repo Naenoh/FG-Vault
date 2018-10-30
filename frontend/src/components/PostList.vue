@@ -11,7 +11,7 @@
         <div class="control">
           <input
             class="input"
-            v-model="title"
+            v-model.trim="filters.title"
             id="post-search-input">
         </div>
       </div>
@@ -22,19 +22,19 @@
         <div class="control">
           <game-picker
             :games="allGames"
-            :game-id.sync="gameId"/>
+            :game-id.sync="filters.gameId"/>
         </div>
       </div>
       <div
         class="field has-addons column is-narrow"
-        v-if="gameId != -1">
+        v-if="filters.gameId">
         <div class="control">
           <div class="button is-static">Char</div>
         </div>
         <div class="control">
           <char-picker
             :chars="chars"
-            :char-id.sync="charId"/>
+            :char-id.sync="filters.charId"/>
         </div>
       </div>
       <div class="field has-addons column is-narrow">
@@ -44,7 +44,7 @@
         <div class="control">
           <cat-picker
             :categories="allCategories"
-            :cat-ids.sync="catIds"
+            :cat-ids.sync="filters.catIds"
             :for-search="true"/>
         </div>
       </div>
@@ -115,13 +115,8 @@ export default {
           filteredPosts(page: $page, title:$title,gameId:$gameId,charId:$charId, catIds:$catIds){posts{title description game{id name} char{id name} categories{id name} links{url}} lastPage}
        }`,
       variables () {
-        return {
-          title: this.title.trim(),
-          gameId: this.gameId,
-          charId: this.charId,
-          catIds: this.catIds !== '-1' ? [this.catIds] : [],
-          page: this.page
-        }
+        let vars = Object.assign({page: this.page}, this.filters)
+        return vars
       },
       result () {
         if (!this.querySynced()) {
@@ -137,62 +132,55 @@ export default {
       allGames: [],
       allCategories: [],
       filteredPosts: {},
-      title: this.$route.query.title || '',
-      gameId: this.$route.query.gameId || '-1',
-      charId: this.$route.query.charId || '-1',
-      catIds: this.$route.query.catIds || '-1',
       page: 1,
-      baseData: {
-        title: '',
-        gameId: '-1',
-        charId: '-1',
-        catIds: '-1'
+      filters: {
+        title: this.$route.query.title,
+        gameId: this.$route.query.gameId,
+        charId: this.$route.query.charId,
+        catIds: this.$route.query.catIds
       },
       loadingCount: 0
     }
   },
   methods: {
     updateGameId: function (val) {
-      this.gameId = val
+      this.filters.gameId = val
     },
     updateCharId: function (val) {
-      this.gameId = val.game
-      this.charId = val.char
+      this.filters.gameId = val.game
+      this.filters.charId = val.char
     },
     updateCatIds: function (val) {
-      this.catIds = val
+      this.filters.catIds = val
     },
     resetFilters: function () {
-      this.title = ''
-      this.gameId = '-1'
-      this.charId = '-1'
-      this.catIds = '-1'
+      this.filters = {
+        title: undefined,
+        gameId: undefined,
+        charId: undefined,
+        catIds: undefined
+      }
       this.page = 1
     },
     querySynced: function () {
-      return this.title === (this.$route.query.title || '') &&
-        this.gameId === (this.$route.query.gameId || '-1') &&
-        this.charId === (this.$route.query.charId || '-1') &&
-        this.catIds === (this.$route.query.catIds || '-1')
+      return this.filters.title === this.$route.query.title &&
+        this.filters.gameId === this.$route.query.gameId &&
+        this.filters.charId === this.$route.query.charId &&
+        this.filters.catIds === this.$route.query.catIds
     },
     updateRoute: function () {
+      console.log('Update Route')
       this.$router.push(
         {
           path: '',
-          query: {
-            title: this.title !== this.baseData.title ? this.title : undefined,
-            gameId: this.gameId !== this.baseData.gameId ? this.gameId : undefined,
-            charId: this.charId !== this.baseData.charId ? this.charId : undefined,
-            catIds: this.catIds !== this.baseData.catIds ? this.catIds : undefined
-          }
+          query: Object.assign({}, this.filters)
         }
       )
     },
     updateData: function () {
-      this.title = this.$route.query.title || ''
-      this.gameId = this.$route.query.gameId || '-1'
-      this.charId = this.$route.query.charId || '-1'
-      this.catIds = this.$route.query.catIds || '-1'
+      console.log('Update Data')
+      // Copying the query object
+      this.filters = Object.assign({}, this.$route.query)
     }
   },
   computed: {
@@ -200,30 +188,29 @@ export default {
       return this.loadingCount > 0
     },
     isFiltered: function () {
-      const currentData = {
-        title: this.title,
-        gameId: this.gameId,
-        charId: this.charId,
-        catIds: this.catIds
-      }
-      return !(JSON.stringify(this.baseData) === JSON.stringify(currentData))
+      // Checks if every property in filters is undefined or empty string
+      return !Object.values(this.filters).every(val => val === undefined || val === '')
     },
     noResults: function () {
       return !this.filteredPosts.posts || this.filteredPosts.posts.length === 0
     },
     chars: function () {
-      return this.allGames.find((game) => game.id === this.gameId).chars
+      if (this.filters.gameId) {
+        return this.allGames.find((game) => game.id === this.filters.gameId).chars
+      } else {
+        return []
+      }
     }
   },
   watch: {
-    gameId: {
-      handler (a, b) {
-        if (b !== '-1') {
-          this.charId = '-1'
+    'filters.gameId': {
+      handler (oldVal, newVal) {
+        if (newVal) {
+          this.filters.charId = undefined
         }
       }
     },
-    '$route' (to, from) {
+    '$route' (oldVal, newVal) {
       if (!this.querySynced()) {
         this.updateData()
       }

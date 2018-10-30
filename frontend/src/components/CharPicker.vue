@@ -4,7 +4,7 @@
       <select v-model="charIdC">
         <option
           v-if="forSearch"
-          value=-1>Any</option>
+          :value=undefined>Any</option>
         <option
           v-for="char in chars"
           :value="char.id"
@@ -29,7 +29,7 @@ export default {
     charId: {
       type: String,
       default: function () {
-        return '1'
+        return undefined
       }
     },
     forSearch: {

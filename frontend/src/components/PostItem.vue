@@ -29,6 +29,8 @@
         v-for="link in post.links"
         :key="link.id">
         <a
+          target="_blank"
+          class="tag is-link"
           :href="link.url">{{ formatLink(link.url) }}
         </a>
       </div>
@@ -71,14 +73,15 @@ export default {
     filterChar: function () {
       this.$emit('updateCharId', { game: this.post.game.id, char: this.post.char.id })
     },
-    filterCat: function (a) {
-      this.$emit('updateCatIds', a.target.dataset.id)
+    filterCat: function (evt) {
+      this.$emit('updateCatIds', evt.target.dataset.id)
     },
     formatLink: function (link) {
-      return '[' + link.split('/')[2] + ']'
+      return link.split('/')[2]
     },
-    toggleDesc: function (a) {
-      if (!a.target.classList.contains('tag')) {
+    toggleDesc: function (evt) {
+      console.log(evt.target)
+      if (!evt.target.classList.contains('tag')) {
         this.descHidden = !this.descHidden
       }
     }

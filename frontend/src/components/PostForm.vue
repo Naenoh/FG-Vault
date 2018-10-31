@@ -147,7 +147,7 @@ export default {
       description: '',
       gameId: '1',
       charId: '1',
-      catIds: '-1',
+      catIds: undefined,
       catArray: [],
       urls: '',
       visible: false,
@@ -205,7 +205,7 @@ export default {
       this.title = ''
       this.description = ''
       this.urls = ''
-      this.catIds = '-1'
+      this.catIds = undefined
       this.catArray = []
     },
     getCat (id) {
@@ -261,7 +261,7 @@ export default {
       this.charId = this.chars[0].id
     },
     catIds: function () {
-      if (this.catIds !== '-1' && this.catArray.indexOf(this.catIds) === -1) {
+      if (this.catIds !== undefined && this.catArray.indexOf(this.catIds) === -1) {
         this.catArray.push(this.catIds)
       }
     }

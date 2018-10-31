@@ -158,6 +158,8 @@ class AllPosts(graphene.ObjectType):
 
 class Mutations(graphene.ObjectType):
     create_post = CreatePost.Field()
+
+    # Disabled mutations
     # create_game = CreateGame.Field()
     # create_char = CreateChar.Field()
     # create_cat = CreateCategory.Field()

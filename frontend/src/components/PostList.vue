@@ -169,11 +169,10 @@ export default {
         this.filters.catIds === this.$route.query.catIds
     },
     updateRoute: function () {
-      console.log('Update Route')
-      this.$router.push(
+      this.$router.replace(
         {
           path: '',
-          query: Object.assign({}, this.filters)
+          query: this.filters
         }
       )
     },

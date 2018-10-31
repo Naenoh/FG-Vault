@@ -1,11 +1,11 @@
 import { mount } from '@vue/test-utils'
-import GamePicker from '@/components/GamePicker'
+import CharPicker from '@/components/CharPicker'
 
-describe('Game-picker Component', () => {
+describe('Character-picker Component', () => {
     let wrapper
     
     beforeEach(() => {
-        wrapper = mount(GamePicker)
+        wrapper = mount(CharPicker)
     })
 
     it('should render default option', () => {
@@ -14,18 +14,18 @@ describe('Game-picker Component', () => {
     })
 
     it('should emit event when value is changed', () => {
-        const gameId = '1'
+        const charId = '1'
         wrapper.setProps({
-            games: [{id: gameId, name:'Tekken'}]
+            chars: [{id: charId, name:'Tekken'}]
         })
         const options = wrapper.find('.select select').findAll('option')
         options.at(1).setSelected()
-        const emittedUpdates = wrapper.emitted()['update:gameId']
+        const emittedUpdates = wrapper.emitted()['update:charId']
         expect(emittedUpdates.length)
             .toEqual(1)
         
         // emmitedUpdates is an array of array because you can emit multiple values at once
         expect(emittedUpdates)
-            .toEqual([[gameId]])
+            .toEqual([[charId]])
     })
 })

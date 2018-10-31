@@ -1,11 +1,11 @@
 import { mount } from '@vue/test-utils'
-import GamePicker from '@/components/GamePicker'
+import CatPicker from '@/components/CatPicker'
 
-describe('Game-picker Component', () => {
+describe('Category-picker Component', () => {
     let wrapper
     
     beforeEach(() => {
-        wrapper = mount(GamePicker)
+        wrapper = mount(CatPicker)
     })
 
     it('should render default option', () => {
@@ -13,19 +13,25 @@ describe('Game-picker Component', () => {
             .toEqual('Any')
     })
 
+    it('should render None option when not for search', () => {
+        wrapper.setProps({forSearch: false})
+        expect(wrapper.find('.select select').text())
+            .toEqual('None')
+    })
+
     it('should emit event when value is changed', () => {
-        const gameId = '1'
+        const categoryId = '1'
         wrapper.setProps({
-            games: [{id: gameId, name:'Tekken'}]
+            categories: [{id: categoryId, name:'Combo'}]
         })
         const options = wrapper.find('.select select').findAll('option')
         options.at(1).setSelected()
-        const emittedUpdates = wrapper.emitted()['update:gameId']
+        const emittedUpdates = wrapper.emitted()['update:catIds']
         expect(emittedUpdates.length)
             .toEqual(1)
         
         // emmitedUpdates is an array of array because you can emit multiple values at once
         expect(emittedUpdates)
-            .toEqual([[gameId]])
+            .toEqual([[categoryId]])
     })
 })

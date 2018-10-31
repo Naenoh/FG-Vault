@@ -22,9 +22,7 @@
 
 ##### Before release
 
-- Group filters, rework base values handling
 - fix pc/osx differences
-- Clean up code
 - Unit tests 
 - Rework deployement
 - Find a way to do migrations
@@ -32,8 +30,3 @@
 - Add favicon
 - Fill default database -> write txt>sql script
 - Buy domain and point VPS
-
-### Issues
-
-- search code is ugly (multiple ifs, None/[] thing)
-- Bulma import is possibly ugly ?

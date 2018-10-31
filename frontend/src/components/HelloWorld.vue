@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h1>HELLO {{ this.$route.path }}</h1>
+    <h1>Welcome to Your Vue.js App</h1>
   </div>
 </template>
 

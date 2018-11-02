@@ -80,7 +80,6 @@ export default {
       return link.split('/')[2]
     },
     toggleDesc: function (evt) {
-      console.log(evt.target)
       if (!evt.target.classList.contains('tag')) {
         this.descHidden = !this.descHidden
       }

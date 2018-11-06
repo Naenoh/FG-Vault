@@ -28,7 +28,7 @@
 - Find a way to do migrations
 - Find final name
 - Add favicon
-- Fill default database -> write txt>sql script
+- Fill default database
 - Buy domain and point VPS
 
 ### Docs

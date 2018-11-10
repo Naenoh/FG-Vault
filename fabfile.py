@@ -1,5 +1,7 @@
 from fabric import task
 
+hosts = ["root@fgld"]
+
 @task
 def deploy(c):
     """
@@ -56,3 +58,8 @@ def dbrestore(c, file="dump.dmp"):
     """
     print("Restoring database contents from file {}".format(file))
     print("Done")
+
+
+@task(hosts=hosts)
+def test(c):
+    c.run('uname -s')

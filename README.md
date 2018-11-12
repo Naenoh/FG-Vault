@@ -43,3 +43,5 @@
 - [Flask-SQL Alchemy](http://flask-sqlalchemy.pocoo.org/2.3/)
 - [Graphene](https://docs.graphene-python.org/en/latest/)
 - [PostgreSQL](https://www.postgresql.org/docs/current/static/index.html)
+
+- [Fabric](http://docs.fabfile.org/en/2.4/)

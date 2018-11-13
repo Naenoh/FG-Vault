@@ -29,10 +29,13 @@ def psql(c, filename=""):
     """
     if (filename != ""):
         print("Running SQL script {}".format(filename))
+        c.put(filename, remote=base_folder)
+        c.run(dockercmd + "docker-compose exec -T postgres psql -U fgtdUser fgtd < " + base_folder + filename, pty=True)
+        c.run("rm " + base_folder + filename)
         print("Done")
     else:
         print("Connecting to PSQL")
-        c.run(dockercmd + "docker-compose exec postgres psql -U fgtdUser fgtd", pty=True)
+        c.run(dockercmd + "docker-compose exec -T postgres psql -U fgtdUser fgtd", pty=True)
 
 @task(hosts=hosts)
 def ssh(c):
@@ -45,10 +48,10 @@ def ssh(c):
 @task(help={'servicename': "Name of the docker service to connect to"}, hosts=hosts)
 def service(c, servicename):
     """
-    Connect to the specified docker service
+    Connect to the specified docker service (super duper bugged rn)
     """
     print("Connecting to service {}".format(servicename))
-    c.run(dockercmd + "docker-compose exec {} sh".format(servicename), pty=True)
+    c.run(dockercmd + "docker-compose exec -T {} sh".format(servicename), pty=True)
 
 @task(help={'file': "Name of file to dump to"}, hosts=hosts)
 def dbdump(c, file="dump.dmp"):

@@ -63,7 +63,7 @@
       class="table is-hoverable is-fullwidth">
       <post-header/>
       <div
-        :class="{ 'is-blurred': isLoading}">
+      :class="{ 'is-blurred': isLoading}">
         <post-item
           v-for="post in filteredPosts.posts"
           :post="post"

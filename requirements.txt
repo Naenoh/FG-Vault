@@ -1,0 +1,4 @@
+cryptography==1.5
+fabric==2.4.0
+invoke==1.2.0
+paramiko==2.4.2

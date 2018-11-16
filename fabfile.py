@@ -16,10 +16,8 @@ def deploy(c):
     print("Deploying new version of the app")
     c.run(basecmd + "git pull")
     c.run(frontcmd + "npm run build")
-    c.run(dockercmd + "docker-compose down")
-    c.run(dockercmd + "docker-compose build")
-    c.run(dockercmd + "docker-compose up -d")
-    c.run(dockercmd + "docker-compose exec gunicorn python manage.py db upgrade")
+    c.run(dockercmd + "docker-compose up -d --build")
+    c.run(dockercmd + "docker-compose exec gunicorn python manage.py db upgrade", pty=True)
     print("Done")
 
 @task(hosts=hosts)

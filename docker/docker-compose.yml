@@ -2,7 +2,7 @@ version: '2.1'
 
 services:
   nginx:
-    image: nginx:alpine
+    image: fholzer/nginx-brotli
     ports:
       - "80:80"
       - "443:443"

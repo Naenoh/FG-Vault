@@ -1,7 +1,8 @@
 <template>
   <article
     class="post-item columns is-multiline is-mobile"
-    @click="toggleDesc">
+    @click="toggleDesc"
+    :title="formatedTime">
     <div class="column is-6-desktop is-12-mobile">
       <div class="has-text-weight-bold">{{ post.title }}</div>
       <div
@@ -83,6 +84,11 @@ export default {
       if (!evt.target.classList.contains('tag')) {
         this.descHidden = !this.descHidden
       }
+    }
+  },
+  computed: {
+    formatedTime: function () {
+      return 'Submitted on ' + new Date(this.post.timeCreated).toString()
     }
   }
 }

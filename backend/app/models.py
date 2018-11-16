@@ -2,6 +2,7 @@
 # from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.sql import func
 
 # from .database import Base
 from app import db
@@ -11,6 +12,7 @@ Integer = db.Integer
 String = db.String
 relationship = db.relationship
 ForeignKey = db.ForeignKey
+DateTime = db.DateTime
 
 Base = declarative_base()
 # We will need this for querying
@@ -41,6 +43,7 @@ class Post(db.Model):
     char_id = Column(Integer, ForeignKey('chars.id'))
     char = relationship('Char', backref='posts')
     categories = relationship('Category', secondary=cats)
+    time_created = Column(DateTime(timezone=True), server_default=func.now())
 
     def __repr__(self):
         return '<Post %r>' % self.title

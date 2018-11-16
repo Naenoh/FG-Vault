@@ -1,9 +1,12 @@
 from fabric import task
 
 hosts = ["fgld"]
-base_folder = "/opt/fgtd/"
+base_folder = "/opt/fgld/"
 docker_folder = base_folder + "docker"
+frontend_folder = base_folder + "frontend"
+basecmd = "cd " + base_folder + " && "
 dockercmd = "cd " + docker_folder + " && "
+frontcmd = "cd " + frontend_folder + " && "
 
 @task(hosts=hosts)
 def deploy(c):
@@ -11,6 +14,12 @@ def deploy(c):
     Deploys the master branch on the server
     """
     print("Deploying new version of the app")
+    c.run(basecmd + "git pull")
+    c.run(frontcmd + "npm run build")
+    c.run(dockercmd + "docker-compose down")
+    c.run(dockercmd + "docker-compose build")
+    c.run(dockercmd + "docker-compose up -d")
+    c.run(dockercmd + "docker-compose exec gunicorn python manage.py db upgrade")
     print("Done")
 
 @task(hosts=hosts)

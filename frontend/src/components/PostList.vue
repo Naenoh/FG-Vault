@@ -112,7 +112,7 @@ export default {
     allCategories: gql`{allCategories{id name}}`,
     filteredPosts: {
       query: gql`query getFilteredPosts($page: Int, $title: String, $gameId: Int, $charId: Int, $catIds: [Int]){
-          filteredPosts(page: $page, title:$title,gameId:$gameId,charId:$charId, catIds:$catIds){posts{title description game{id name} char{id name} categories{id name} links{url}} lastPage}
+          filteredPosts(page: $page, title:$title,gameId:$gameId,charId:$charId, catIds:$catIds){posts{title description game{id name} char{id name} categories{id name} links{url} timeCreated} lastPage}
        }`,
       variables () {
         let vars = Object.assign({page: this.page}, this.filters)

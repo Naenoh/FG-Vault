@@ -66,6 +66,8 @@ def dbdump(c, file="dump.dmp"):
     Dumps the database to the given file (-f), or dump.dmp if none is given
     """
     print("Dumping database contents to file {}".format(file))
+    c.run(dockercmd + "docker-compose exec postgres pg_dump -Fc -U fgtdUser -f /usr/share/dumps/{} fgtd".format(file), pty=True)
+    c.get("/home/fgld/dumps/{}".format(file))
     print("Done")
 
 @task(help={'file': "Name of the file to restore from"}, hosts=hosts)

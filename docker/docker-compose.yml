@@ -17,7 +17,7 @@ services:
     image: postgres:10-alpine
     env_file: ./postgres/.env
     volumes:
-      - "../backend/basedata.sql:/usr/share/sql/basedata.sql"
+      - "/home/fgld/dumps:/usr/share/dumps"
   gunicorn:
     build: ../backend
     env_file: ./gunicorn/.env

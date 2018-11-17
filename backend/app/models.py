@@ -13,6 +13,7 @@ String = db.String
 relationship = db.relationship
 ForeignKey = db.ForeignKey
 DateTime = db.DateTime
+backref = db.backref
 
 Base = declarative_base()
 # We will need this for querying
@@ -39,10 +40,10 @@ class Post(db.Model):
     title = Column(String(255))
     description = Column(String(10000))
     game_id = Column(Integer, ForeignKey('games.id'))
-    game = relationship('Game', backref='posts')
+    game = relationship('Game', backref='posts', lazy=False)
     char_id = Column(Integer, ForeignKey('chars.id'))
-    char = relationship('Char', backref='posts')
-    categories = relationship('Category', secondary=cats)
+    char = relationship('Char', backref='posts', lazy=False)
+    categories = relationship('Category', secondary=cats, lazy=False)
     time_created = Column(DateTime(timezone=True), server_default=func.now())
 
     def __repr__(self):
@@ -63,7 +64,7 @@ class Char(db.Model):
     id = Column(Integer, primary_key=True)
     name = Column(String(64))
     game_id = Column(Integer, ForeignKey('games.id'))
-    game = relationship('Game', backref='chars')
+    game = relationship('Game', backref=backref('chars', lazy=False))
 
     def __repr__(self):
         return '<Char %r>' % self.name
@@ -74,7 +75,7 @@ class Link(db.Model):
     id = Column(Integer, primary_key=True)
     url = Column(String(255), unique=True)
     post_id = Column(Integer, ForeignKey('posts.id'))
-    post = relationship('Post', backref='links')
+    post = relationship('Post', backref=backref('links', lazy=False))
 
     def __repr__(self):
         return '<Link %r>' % self.url

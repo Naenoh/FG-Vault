@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from flask_caching import Cache
 from werkzeug.contrib.fixers import ProxyFix
 import os
 
@@ -19,6 +20,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 CORS(app)
+cache = Cache(app,config={'CACHE_TYPE': 'simple'})
 
 from app import models
 

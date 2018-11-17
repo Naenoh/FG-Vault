@@ -3,6 +3,7 @@ import sqlalchemy
 import validators
 from graphene_sqlalchemy import SQLAlchemyObjectType
 from sqlalchemy import text
+from app import cache
 
 from .models import Game as GameModel, Post as PostModel, Link as LinkModel, Char as CharModel, \
     Category as CategoryModel, db
@@ -186,12 +187,15 @@ class Query(graphene.ObjectType):
     def resolve_all_posts(self, info):
         return AllPosts(posts=PostModel.query.all())
 
+    @cache.cached(timeout=86400, key_prefix='all_games')
     def resolve_all_games(self, info):
-        return GameModel.query.all()
+        return GameModel.query.enable_eagerloads(True).all()
 
+    @cache.cached(timeout=86400, key_prefix='all_categories')
     def resolve_all_categories(self, info):
-        return CategoryModel.query.all()
+        return CategoryModel.query.enable_eagerloads(True).all()
 
+    @cache.memoize(300)
     def resolve_filtered_posts(self, info, page, title, game_id, char_id, cat_ids):
         terms = title.split(" ")
         regexp = "(?=.*" + ")(?=.*".join(terms) + ")"

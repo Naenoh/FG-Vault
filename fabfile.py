@@ -9,15 +9,19 @@ dockercmd = "cd " + docker_folder + " && "
 frontcmd = "cd " + frontend_folder + " && "
 
 @task(hosts=hosts)
-def deploy(c):
+def deploy(c, frontend=False, backend=False, migrate=False):
     """
     Deploys the master branch on the server
     """
     print("Deploying new version of the app")
-    c.run(basecmd + "git pull")
-    c.run(frontcmd + "npm run build")
-    c.run(dockercmd + "docker-compose up -d --build")
-    c.run(dockercmd + "docker-compose exec gunicorn python manage.py db upgrade", pty=True)
+    if frontend or backend or migrate:
+        c.run(basecmd + "git pull")
+    if frontend:
+        c.run(frontcmd + "npm run build")
+    if backend:
+        c.run(dockercmd + "docker-compose up -d --build")
+    if migrate:
+        c.run(dockercmd + "docker-compose exec gunicorn python manage.py db upgrade", pty=True)
     print("Done")
 
 @task(hosts=hosts)
@@ -79,6 +83,7 @@ def dbrestore(c, file="dump.dmp"):
     print("Done")
 
 
-@task(hosts=hosts)
+@task
 def test(c):
-    c.run('echo $0')
+    print("{} {} {}".format(frontend, backend, migrate))
+    

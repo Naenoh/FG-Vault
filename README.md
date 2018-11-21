@@ -38,6 +38,7 @@
 - [Flask](http://flask.pocoo.org/docs/1.0/)
 - [SQL Alchemy](https://docs.sqlalchemy.org/en/latest/)
 - [Flask-SQL Alchemy](http://flask-sqlalchemy.pocoo.org/2.3/)
+- [Flask-Caching](https://flask-caching.readthedocs.io/en/latest/#)
 - [Graphene](https://docs.graphene-python.org/en/latest/)
 - [PostgreSQL](https://www.postgresql.org/docs/current/static/index.html)
 

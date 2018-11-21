@@ -13,11 +13,13 @@ services:
       - "../frontend/dist:/usr/share/nginx/html"
     depends_on:
       - gunicorn
+    restart: always  
   postgres:
     image: postgres:10-alpine
     env_file: ./postgres/.env
     volumes:
       - "/home/fgld/dumps:/usr/share/dumps"
+    restart: always  
   gunicorn:
     build: ../backend
     env_file: ./gunicorn/.env
@@ -25,4 +27,4 @@ services:
       - "8000"
     depends_on: 
       - postgres
-        
+    restart: always

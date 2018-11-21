@@ -1,0 +1,9 @@
+[Unit]
+Description=dumps the database contents
+
+[Service]
+User=root
+Group=root
+Type=oneshot
+Environment=DISPLAY=:0.0
+ExecStart=/home/fgld/db_dump.sh

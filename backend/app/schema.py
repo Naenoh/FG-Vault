@@ -69,6 +69,7 @@ class CreatePost(graphene.Mutation):
                 db.session.add(LinkModel(url=link, post=newpost))
             db.session.commit()
             ok = True
+            cache.delete_memoized(get_filtered_posts) # Invalidating posts cache 
             return CreatePost(ok=ok, post=newpost)
         except sqlalchemy.exc.IntegrityError as e:
             print(e.orig.args)
@@ -172,9 +173,24 @@ class FilteredPosts(graphene.ObjectType):
     size = graphene.Int()
     last_page = graphene.Int()
 
+# This method is extracted because you cant memoize the resolver call because of the info parameter. 
+# Extracting every database access functions in their own file might be a good idea. 
+@cache.memoize(36000)
+def get_filtered_posts(page, title, game_id, char_id, cat_ids):
+    terms = title.split(" ")
+    regexp = "(?=.*" + ")(?=.*".join(terms) + ")"
+    current_query = PostModel.query.filter(text("title ~* :regexp")).params(regexp=regexp).order_by(PostModel.id.desc())
+    if char_id != -1:
+        current_query = current_query.filter(PostModel.char_id == char_id)
+    if game_id != -1:
+        current_query = current_query.filter(PostModel.game_id == game_id)
+    if cat_ids != [None] and cat_ids:
+        current_query = current_query.join(PostModel.categories).filter(CategoryModel.id.in_(cat_ids))
+    pages = current_query.paginate(page, 25, False)
+    return FilteredPosts(posts=pages.items, size=pages.total, last_page=pages.pages)
+
 
 class Query(graphene.ObjectType):
-    # all_posts = graphene.Field(AllPosts)
     all_games = graphene.List(Game)
     all_categories = graphene.List(Category)
     filtered_posts = graphene.Field(FilteredPosts,
@@ -195,19 +211,10 @@ class Query(graphene.ObjectType):
     def resolve_all_categories(self, info):
         return CategoryModel.query.enable_eagerloads(True).all()
 
-    @cache.memoize(300)
+    
     def resolve_filtered_posts(self, info, page, title, game_id, char_id, cat_ids):
-        terms = title.split(" ")
-        regexp = "(?=.*" + ")(?=.*".join(terms) + ")"
-        current_query = PostModel.query.filter(text("title ~* :regexp")).params(regexp=regexp).order_by(PostModel.id.desc())
-        if char_id != -1:
-            current_query = current_query.filter(PostModel.char_id == char_id)
-        if game_id != -1:
-            current_query = current_query.filter(PostModel.game_id == game_id)
-        if cat_ids != [None] and cat_ids:
-            current_query = current_query.join(PostModel.categories).filter(CategoryModel.id.in_(cat_ids))
-        pages = current_query.paginate(page, 25, False)
-        return FilteredPosts(posts=pages.items, size=pages.total, last_page=pages.pages)
+        return get_filtered_posts(page, title, game_id, char_id, cat_ids)
 
+    
 
 schema = graphene.Schema(query=Query, mutation=Mutations)

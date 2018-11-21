@@ -22,13 +22,10 @@
 
 ##### Before release
 
-- fix pc/osx differences
-- Unit tests 
-- Rework deployement
-- Find a way to do migrations
+- FAQ section
+- Verify responsiveness of filters and adding posts
 - Find final name
 - Add favicon
-- Fill default database
 - Buy domain and point VPS
 
 ### Docs

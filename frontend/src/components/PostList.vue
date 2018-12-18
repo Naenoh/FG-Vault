@@ -209,6 +209,12 @@ export default {
         }
       }
     },
+    'filters': {
+      handler (oldVal, newVal) {
+        this.page = 1
+      },
+      deep: true
+    },
     '$route' (oldVal, newVal) {
       if (!this.querySynced()) {
         this.updateData()

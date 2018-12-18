@@ -22,8 +22,11 @@
 
 ##### Before release
 
-- FAQ section
+- weird characters
+- description error linked to links field
+- selecting text in description closes it
 - Verify responsiveness of filters and adding posts
+- verify/refactor for Open sourcing
 - Find final name
 - Add favicon
 - Buy domain and point VPS

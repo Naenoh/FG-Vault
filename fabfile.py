@@ -85,5 +85,5 @@ def dbrestore(c, file="dump.dmp"):
 
 @task
 def test(c):
-    print("{} {} {}".format(frontend, backend, migrate))
+    print("yo")
     

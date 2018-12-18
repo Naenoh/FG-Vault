@@ -30,8 +30,8 @@ def restart(c):
     Restarts the app
     """
     print("Restarting Docker Containers")
-    print("Done")
     c.run(dockercmd + "docker-compose restart")
+    print("Done")
 
 @task(help={'filename': "Name of the sql file to run"}, hosts=hosts)
 def psql(c, filename=""):
@@ -83,7 +83,4 @@ def dbrestore(c, file="dump.dmp"):
     print("Done")
 
 
-@task
-def test(c):
-    print("yo")
     

@@ -48,6 +48,7 @@ class CreatePost(graphene.Mutation):
     errors = graphene.List(graphene.String)
 
     def mutate(self, info, title, description, game_id, char_id, categories_id, links):
+        print(info)
         title = title.strip()
         errors = []
         if title == '':

@@ -105,6 +105,7 @@ export default {
 .post-item {
   border-top: 1px solid #D3D3D3;
   padding-left: 0.75rem;
+  overflow: hidden;
 }
 .post-item:hover {
   background-color: #F5F5F5;

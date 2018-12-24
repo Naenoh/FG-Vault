@@ -2,7 +2,7 @@
   <div class="site-header">
     <div class="top-line"/>
     <div class="title-cont">
-      <p class="title is-1">FGLD</p>
+      <p class="title is-1">FG Vault</p>
       <p class="subtitle">A Fighting Game Links Directory</p>
     </div>
   </div>

@@ -1,8 +1,7 @@
 .env
 .DS_STORE
 *.pyc
-bleh
 .vscode
 npm-debug.log
-gamechars.sql
 fabric.yml
+script_output

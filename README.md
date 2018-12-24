@@ -24,7 +24,7 @@
 
 - description error linked to links field
 - selecting text in description closes it
-- verify/refactor for Open sourcing
+- verify/refactor for Open sourcing > add licence, complete readme for install, update database uri handling
 - Find final name > FGVault
 - Add favicon
 - Buy domain and point VPS

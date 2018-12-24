@@ -9,7 +9,7 @@ app.add_url_rule(
     view_func=GraphQLView.as_view(
         'graphql',
         schema=schema,
-        graphiql=os.environ.get('ENV','') != 'production'  # for having the GraphiQL interface
+        graphiql=app.config['GRAPHIQL']  # for having the GraphiQL interface
     )
 )
 

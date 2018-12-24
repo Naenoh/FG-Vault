@@ -7,16 +7,11 @@ import os
 
 app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app)
-if os.environ.get('ENV','') == 'production':
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://{}:{}@{}:{}/{}'.format(os.environ['POSTGRES_DB_USER'],
-                                                                                 os.environ['POSTGRES_DB_PWD'],
-                                                                                 os.environ['POSTGRES_DB_HOST'],
-                                                                                 os.environ['POSTGRES_DB_PORT'],
-                                                                                 os.environ['POSTGRES_DB_NAME'])
-else:
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://fgctechuser:fgctechpass10@127.0.0.1:5432/fgctech'  # TODO hide this
-app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# Loads the default/production configuration
+app.config.from_pyfile('default_config.py')
+
+# Loads specific dev config, if it exists
+app.config.from_pyfile('dev_config.py', True)
 
 db = SQLAlchemy(app)
 CORS(app)

@@ -1,7 +1,7 @@
 {
-  "name": "fgtechdir",
+  "name": "FG Vault",
   "version": "1.0.0",
-  "description": "A Fighting Games Tech Directory",
+  "description": "A Fighting Games Links Directory",
   "author": "Naeno",
   "private": true,
   "scripts": {

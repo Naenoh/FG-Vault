@@ -42,7 +42,7 @@
               The Backend is made with <a href="http://flask.pocoo.org/"><strong>Flask</strong></a> and <a href="https://www.sqlalchemy.org/"><strong>SQLAlchemy</strong></a>.
               To connect the two parts, I decided to go for a <a href="https://graphql.org/"><strong>GraphQL</strong></a> based API.
               To do that, i'm using <a href="https://graphene-python.org/"><strong>Graphene</strong></a> on the server side and <a href="https://www.apollographql.com/"><strong>Apollo</strong></a> for the client.
-              The database is <a href="https://graphene-python.org/"><strong>Graphene</strong></a> and i'm using <a href="https://www.docker.com/"><strong>Docker</strong></a> with <a href="https://docs.docker.com/compose/"><strong>Docker Compose</strong></a> to facilitate deployement.
+              The database is <a href="https://graphene-python.org/"><strong>Graphene</strong></a> and I'm using <a href="https://www.docker.com/"><strong>Docker</strong></a> with <a href="https://docs.docker.com/compose/"><strong>Docker Compose</strong></a> to facilitate deployement.
               I'm also using <a href="http://www.fabfile.org/"><strong>Fabric</strong></a> to easily run various tasks remotely.
             </p>
           </section>

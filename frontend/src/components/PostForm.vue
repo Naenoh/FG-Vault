@@ -114,14 +114,18 @@
               Description
               <textarea
                 class="textarea"
+                :class="{ 'is-danger': invalidDesc }"
                 v-model="description"/>
+              <div v-if="invalidDesc">
+                <span class="help is-danger">Description can't be longer than 10000 characters.</span>
+              </div>
             </label>
           </div>
         </section>
         <footer class="modal-card-foot">
           <button
             class="button is-success"
-            :disabled="emptyTitle || invalidLinks"
+            :disabled="invalidPost"
             @click="submitPost">Add</button>
           <button
             class="button"
@@ -183,6 +187,12 @@ export default {
     },
     invalidLinks: function () {
       return this.linksErrorMsgs.length !== 0
+    },
+    invalidDesc: function () {
+      return this.description.length > 10000
+    },
+    invalidPost: function () {
+      return this.emptyTitle || this.invalidLinks || this.invalidDesc
     },
     linksErrorMsgs: function () {
       const errors = []

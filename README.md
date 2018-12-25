@@ -41,7 +41,7 @@ Every command here is meant to be run in the `backend` directory
 
 - Installing the app :
   - If using one, activate your virtual environnement
-  - create an empty postgresql database
+  - create an empty postgresql database (in psql, as postgres/admin user) : `CREATE DATABASE yourdbname; CREATE USER yourdbuser WITH ENCRYPTED PASSWORD 'yourdbpass'; GRANT ALL PRIVILEGES ON DATABASE yourdbname TO yourdbuser;`
   - configure the database URI by creating a `dev_config.py` file in the app folder with `SQLALCHEMY_DATABASE_URI = 'postgresql://YOURDBUSER:YOURDBPASS@127.0.0.1:YOURDBPORT/YOURDBNAME'`. You can also set `GRAPHIQL = True` inside to get access to the graphql console.
   - Install dependencies : `pip install -r requirements.txt`
   - Create (or reset) database tables : `python resetdb.py`

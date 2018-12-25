@@ -28,12 +28,15 @@
             <label class="label">Title</label>
             <input
               class="input"
-              :class="{ 'is-danger': emptyTitle }"
+              :class="{ 'is-danger': emptyTitle || invalidTitle }"
               v-model="title"
               id="post-form-title">
             <p
               class="help is-danger"
-              v-if="emptyTitle">This field can't be empty</p>
+              v-if="emptyTitle">This field can't be empty.</p>
+            <p
+              class="help is-danger"
+              v-if="invalidTitle">Title can't be longer than 255 characters.</p>
           </div>
           <div class="columns is-centered">
             <div class="field column">
@@ -191,13 +194,16 @@ export default {
     invalidDesc: function () {
       return this.description.length > 10000
     },
+    invalidTitle: function () {
+      return this.title.length > 255
+    },
     invalidPost: function () {
-      return this.emptyTitle || this.invalidLinks || this.invalidDesc
+      return this.emptyTitle || this.invalidLinks || this.invalidDesc || this.invalidTitle
     },
     linksErrorMsgs: function () {
       const errors = []
       if (this.urls.trim() === '') {
-        errors.push('This field can\'t be empty')
+        errors.push('This field can\'t be empty.')
       } else {
         this.links.map(function (link) {
           if (!validUrl.isWebUri(link)) {

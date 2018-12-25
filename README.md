@@ -24,7 +24,7 @@
 
 Every command here is meant to be run in the `frontend` directory
 
-- Requirements : nodeJS with npm
+- Requirements : nodeJS (6.0.0+) with npm(3.0.0+)
 - Installing the app dependencies : `npm install`
 - Running the app : `npm run dev`
 - Building the app (can be useful to check file size for example) : `npm run build`
@@ -60,8 +60,6 @@ Some of the files in the repository are only meant for deployement (everything r
 
 ##### Before release
 
-- description error linked to links field
-- selecting text in description closes it
 - Returned errors are too explicit
 - verify/refactor for Open sourcing > add licence, complete readme for install (almost done), Database user is leaked in fabfile.py
 - Find final name > FGVault

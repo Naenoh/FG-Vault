@@ -21,7 +21,7 @@
     </div>
     <div class="column is-1-desktop is-4-mobile is-offset-2-mobile">
       <a
-        class="tag"
+        class="tagg"
         @click="filterChar">{{ post.char.name }}</a>
     </div>
     <div class="column is-2-desktop is-12-mobile">
@@ -110,6 +110,23 @@ export default {
 }
 .post-item:hover {
   background-color: #F5F5F5;
+}
+.tagg {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #dbdbdb;
+  border-radius: 3px;
+  color: #272727;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  font-size: .75rem;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  line-height: 1.5;
+  padding: .5rem;
 }
 
 @media screen and (max-width: 768px){

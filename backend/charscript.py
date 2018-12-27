@@ -9,7 +9,7 @@ else:
             outfile.write("BEGIN;")
             game = ""
             for line in infile:
-                line = line.strip()
+                line = line.strip().replace("\'", "\'\'")
                 if line.startswith("#"):
                     if(game != ""):
                         outfile.write(";\n\n")

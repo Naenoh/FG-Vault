@@ -89,7 +89,7 @@ export default {
   },
   computed: {
     formatedTime: function () {
-      return 'Submitted on ' + new Date(this.post.timeCreated).toString()
+      return 'Post #' + this.post.id + ' - Submitted on ' + new Date(this.post.timeCreated).toString()
     }
   }
 }

@@ -66,6 +66,8 @@ Yoshimitsu
 Noctis
 Anna
 Lei
+Marduk
+Armor King
 #Dragonball FighterZ
 Android 16
 Android 18
@@ -159,6 +161,7 @@ Voldo
 Xianghua
 Yoshimitsu
 Zasalamel
+2B
 #Street Fighter V
 Birdie
 Cammy
@@ -194,6 +197,7 @@ Falke
 G
 Sagat
 Sakura
+Kage
 #BlazBlue: Cross Tag Battle
 Ragna
 Jin
@@ -256,3 +260,354 @@ Phonon
 Mika
 Wagner
 Enkidu
+#King of Fighters XIV
+Kyo Kusanagi
+Benimaru Nikaido
+Goro Daimon
+Sylvie Paula Paula
+Kukri
+Mian
+Nelson
+Zarina
+Bandeiras Hattori
+Iori Yagami
+Mature
+Vice
+Antonov
+Verse
+Kim Kaphwan
+Gang-Il
+Luong
+Ramon
+Angel
+King of Dinosaurs
+Nakoruru
+Mui Mui
+Love Heart
+Xanadu
+Chang Koehan
+Choi Bounge
+Ryo Sakazaki
+Robert Garcia
+Yuri Sakazaki
+Shun'ei
+Tung Fu Rue
+Meitenkun
+K'
+Kula Diamond
+Maxima
+Ralf Jones
+Clark Still
+Leona Heidern
+Geese Howard
+Billy Kane
+Hein
+Terry Bogard
+Andy Bogard
+Joe Higashi
+King
+Mai Shiranui
+Alice
+Athena Asamiya
+Sie Kensou
+Chin Gentsai
+Whip
+Ryuji Yamazaki
+Vanessa
+Rock Howard
+Oswald
+Heidern
+Najd
+Blue Mary
+#Marvel vs. Capcom Infinite
+Arthur
+Black Panther
+Black Widow
+Captain America
+Captain Marvel
+Chris Redfield
+Chun-Li
+Dante
+Dormammu
+Dr. Strange
+Firebrand
+Frank West
+Gamora
+Ghost Rider
+Haggar
+Hawkeye
+Hulk
+Iron Man
+Jedah
+Mega Man X
+Monster Hunter
+Morrigan
+Nemesis
+Nova
+Rocket Raccoon
+Ryu
+Sigma
+Spencer
+Spider-Man
+Strider
+Thanos
+Thor
+Ultron
+Venom
+Winter Soldier
+Zero
+#Injustice 2
+Aquaman
+Atom
+Atrocitus
+Bane
+Batman
+Black Adam
+Black Canary
+Black Manta
+Blue Beetle
+Brainiac
+Captain Cold
+Catwoman
+Cheetah
+Cyborg
+Darkseid
+Deadshot
+Doctor Fate
+Donatello
+Enchantress
+Firestorm
+Flash
+Gorilla Grodd
+Green Arrow
+Green Lantern
+Harley Quinn
+Hellboy
+Joker
+Leonardo
+Michelangelo
+Poison Ivy
+Raiden
+Raphael
+Red Hood
+Robin
+Scarecrow
+Starfire
+Sub-Zero
+Supergirl
+Superman
+Swamp Thing
+Wonder Woman
+#Ultimate Marvel vs. Capcom 3
+Akuma
+Amaterasu
+Arthur
+Chris Redfield
+Chun-Li
+C. Viper
+Dante
+Felicia
+Firebrand
+Frank West
+Haggar
+Hsien-Ko
+Jill
+Morrigan
+Nemesis
+Phoenix Wright
+Ryu
+Spencer
+Strider
+Trish
+Tron Bonne
+Vergil
+Viewtiful Joe
+Wesker
+Zero
+Captain America
+Deadpool
+Dormammu
+Dr. Doom
+Dr. Strange
+Ghost Rider
+Hawkeye
+Hulk
+Iron Fist
+Iron Man
+Magneto
+MODOK
+Nova
+Phoenix
+Rocket Raccoon
+Sentinel
+She-Hulk
+Shuma-Gorath
+Spider-Man
+Storm
+Super-Skrull
+Taskmaster
+Thor
+Wolverine
+X-23
+#Mortal Kombat XL
+Cassie Cage - Hollywood
+Cassie Cage - Brawler
+Cassie Cage - Spec Ops
+D’Vorah - Brood Mother
+D’Vorah - Swarm Queen
+D’Vorah - Venomous
+Ermac - Mystic
+Ermac - Spectral
+Ermac - Master of Souls
+Erron Black - Marksman
+Erron Black - Gunslinger
+Erron Black - Outlaw
+Ferra & Torr - Ruthless
+Ferra & Torr - Vicious
+Ferra & Torr - Lackey
+Goro - Dragon Fangs
+Goro - Kuatan Warrior
+Goro - Tigrar Fury
+Jacqui - High Tech
+Jacqui - Shotgun
+Jacqui - Full Auto
+Jax - Pumped Up
+Jax - Heavy Weapons
+Jax - Wrestler
+Johnny Cage - A-List
+Johnny Cage - Fistcuffs
+Johnny Cage - Stunt Double
+Kano - Cybernetic
+Kano - Commando
+Kano - Cutthroat
+Kenshi - Kenjutsu
+Kenshi - Balanced
+Kenshi - Possesed
+Kitana - Mournful
+Kitana - Royal Storm
+Kitana - Assassin
+Kotal Kahn - Blood God
+Kotal Kahn - War God
+Kotal Kahn - Sun God
+Kung Jin - Shaolin
+Kung Jin - Ancestral
+Kung Jin - Bojutsu
+Kung Lao - Buzz Saw
+Kung Lao - Tempest
+Kung Lao - Hat Trick
+Liu Kang - Dragon’s Fire
+Liu Kang - Flame Fist
+Liu Kang - Dualist
+Mileena - Ethereal
+Mileena - Piercing
+Mileena - Ravenous
+Quan Chi - Warlock
+Quan Chi - Summoner
+Quan Chi - Sorcerer
+Raiden - Thunder God
+Raiden - Displacer
+Raiden - Master of Storms
+Reptile - Noxious
+Reptile - Deceptive
+Reptile - Nimble
+Scorpion - Ninjutsu
+Scorpion - Hellfire
+Scorpion - Inferno
+Shinnok - Necromancer
+Shinnok - Imposter
+Shinnok - Bone Shaper
+Sonya Blade - Special Forces
+Sonya Blade - Covert Ops
+Sonya Blade - Demolition
+Sub-Zero - Cryomancer
+Sub-Zero - Unbreakable
+Sub-Zero - Grandmaster
+Takeda - Ronin
+Takeda - Shirai Ryu
+Takeda - Lasher
+#Super Street Fighter II X
+Boxer
+Blanka
+Cammy
+Chun-Li
+Claw
+DeeJay
+Dhalsim
+Dictator
+Fei Long
+Honda
+Guile
+Gouki
+Ken
+Ryu
+Sagat
+T.Hawk
+Zangief
+O.Boxer
+O.Blanka
+O.Cammy
+O.Chun-Li
+O.Claw
+O.DeeJay
+O.Dhalsim
+O.Dictator
+O.Fei Long
+O.Honda
+O.Guile
+O.Ken
+O.Ryu
+O.Sagat
+O.T.Hawk
+O.Zangief
+#Vampire Savior
+Anakaris
+Aulbath (Rikuo)
+Bishamon
+Bulleta (BB Hood)
+Demitri
+Felicia
+Gallon (Talbain)
+Jedah
+Lei-Lei (Hsien-ko)
+Lilith
+Morrigan
+Oboro
+Q-Bee
+Sasquatch
+Victor
+Zabel (Lord Raptor)
+#Street Fighter III: 3rd Strike
+Akuma
+Alex
+Chun-Li
+Dudley
+Elena
+Hugo
+Ibuki
+Ken
+Makoto
+Necro
+Oro
+Q
+Remy
+Ryu
+Sean
+Twelve
+Urien
+Yang
+Yun
+#Skullgirls
+Filia
+Cerebella
+Peacock
+Parasoul
+Ms. Fortune
+Painwheel
+Valentine
+Double
+Squigly
+Big Band
+Fukua
+Eliza
+Beowulf
+Robo Fortune

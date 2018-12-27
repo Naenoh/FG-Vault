@@ -1,4 +1,4 @@
-# FG Vault
+# FG Vault - [fgvault.net](https://fgvault.net)
 
 ## Objectives
 
@@ -60,6 +60,7 @@ Some of the files in the repository are only meant for deployement (everything r
 
 ##### Before release
 
+- Improve README
 - Buy domain and point VPS, renew certs
 - Clean database and dump it to a file
 - Launch

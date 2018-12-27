@@ -2,7 +2,7 @@
   <div class="site-header">
     <div class="top-line"/>
     <div class="title-cont">
-      <p class="title is-1">FG Vault</p>
+      <p class="title is-1">FG <span class="emphasized">V</span>ault</p>
       <p class="subtitle">A Fighting Game Links Directory</p>
     </div>
   </div>
@@ -26,5 +26,8 @@ export default {
   }
   .title-cont {
     text-align: center;
+  }
+  .emphasized {
+    color: #00c4a7;
   }
 </style>

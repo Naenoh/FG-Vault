@@ -60,11 +60,9 @@ Some of the files in the repository are only meant for deployement (everything r
 
 ##### Before release
 
-- Returned errors are too explicit
-- verify/refactor for Open sourcing > add licence, complete readme for install (almost done), Database user is leaked in fabfile.py
-- Find final name > FGVault
-- Add favicon
-- Buy domain and point VPS
+- Buy domain and point VPS, renew certs
+- Clean database and dump it to a file
+- Launch
 
 ### Docs
 

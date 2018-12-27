@@ -70,7 +70,7 @@ def dbdump(c, file="dump.dmp"):
     Dumps the database to the given file (-f), or dump.dmp if none is given
     """
     print("Dumping database contents to file {}".format(file))
-    c.run(dockercmd + "sudo docker-compose exec postgres pg_dump -Fc -U fgtdUser -f /usr/share/dumps/{} fgtd".format(file), pty=True)
+    c.run(dockercmd + "sudo docker-compose exec postgres bash -c 'pg_dump -Fc -U \"$POSTGRES_USER\" -f /usr/share/dumps/{} \"$POSTGRES_DB\"'".format(file), pty=True)
     c.get("/home/fgld/dumps/{}".format(file))
     print("Done")
 

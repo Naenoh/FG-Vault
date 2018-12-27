@@ -41,12 +41,12 @@ def psql(c, filename=""):
     if (filename != ""):
         print("Running SQL script {}".format(filename))
         c.put(filename, remote=base_folder)
-        c.run(dockercmd + "docker-compose exec -T postgres psql -U fgtdUser fgtd < " + base_folder + filename, pty=True)
+        c.run(dockercmd + "docker-compose exec -T postgres bash -c 'psql -U \"$POSTGRES_USER\" \"$POSTGRES_DB\" < " + base_folder + filename+"'", pty=True)
         c.run("rm " + base_folder + filename)
         print("Done")
     else:
         print("Connecting to PSQL")
-        c.run(dockercmd + "docker-compose exec -T postgres psql -U fgtdUser fgtd", pty=True)
+        c.run(dockercmd + "docker-compose exec postgres bash -c 'psql -U \"$POSTGRES_USER\" \"$POSTGRES_DB\"'", pty=True)
 
 @task(hosts=hosts)
 def ssh(c):
@@ -84,3 +84,6 @@ def dbrestore(c, file="dump.dmp"):
 
 
     
+@task(hosts=hosts)
+def test(c):
+    c.run(dockercmd + "docker-compose exec -T postgres echo \"$POSTGRES_DB\"")

@@ -11,7 +11,7 @@
         <div class="control">
           <input
             class="input"
-            v-model.trim="filters.title"
+            @input="debounceTitle"
             id="post-search-input">
         </div>
       </div>
@@ -104,6 +104,7 @@ import CatPicker from './CatPicker.vue'
 import GamePicker from './GamePicker.vue'
 import CharPicker from './CharPicker.vue'
 import gql from 'graphql-tag'
+import debounce from 'lodash.debounce'
 
 export default {
   name: 'PostList',
@@ -123,7 +124,6 @@ export default {
           this.updateRoute()
         }
       },
-      debounce: 200,
       loadingKey: 'loadingCount'
     }
   },
@@ -179,7 +179,10 @@ export default {
     updateData: function () {
       // Copying the query object
       this.filters = Object.assign({}, this.$route.query)
-    }
+    },
+    debounceTitle: debounce(function (e) {
+      this.filters.title = e.target.value.trim()
+    }, 200)
   },
   computed: {
     isLoading: function () {

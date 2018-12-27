@@ -61,8 +61,7 @@ Some of the files in the repository are only meant for deployement (everything r
 ##### Before release
 
 - Improve README
-- Buy domain and point VPS, renew certs
-- Clean database and dump it to a file
+- Fix responsiveness with long tags and game/char names
 - Launch
 
 ### Docs
@@ -72,11 +71,13 @@ Some of the files in the repository are only meant for deployement (everything r
 - [Vue-Apollo](https://akryum.github.io/vue-apollo/guide/)
 - [Bulma](https://bulma.io/documentation/)
 
+
 - [Flask](http://flask.pocoo.org/docs/1.0/)
 - [SQL Alchemy](https://docs.sqlalchemy.org/en/latest/)
 - [Flask-SQL Alchemy](http://flask-sqlalchemy.pocoo.org/2.3/)
 - [Flask-Caching](https://flask-caching.readthedocs.io/en/latest/#)
 - [Graphene](https://docs.graphene-python.org/en/latest/)
 - [PostgreSQL](https://www.postgresql.org/docs/current/static/index.html)
+
 
 - [Fabric](http://docs.fabfile.org/en/2.4/)

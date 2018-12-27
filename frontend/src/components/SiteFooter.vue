@@ -4,6 +4,8 @@
       <a href="https://twitter.com/Naen0">Naeno</a>
       -
       <a @click="toggleModal"> FAQ </a>
+      -
+      <a href="https://github.com/Naenoh/FG-Vault">Github</a>
     </p>
     <div
       class="modal"

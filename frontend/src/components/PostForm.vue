@@ -258,7 +258,6 @@ export default {
       }).then((response) => {
         const data = response.data.createPost
         if (data.ok) {
-          console.log('Post successfully added.')
           this.$apollo.provider.defaultClient.resetStore()
           this.toggleModal()
         } else {

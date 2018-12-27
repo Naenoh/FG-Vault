@@ -177,7 +177,6 @@ export default {
       )
     },
     updateData: function () {
-      console.log('Update Data')
       // Copying the query object
       this.filters = Object.assign({}, this.$route.query)
     }

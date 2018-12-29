@@ -1,5 +1,5 @@
 #General
-#Guilty Gear Xrd: Rev2
+#GGXrdR2
 Answer
 Axl
 Baiken
@@ -25,7 +25,7 @@ Slayer
 Sol
 Venom
 Zato-1
-#Tekken 7
+#T7
 Akuma
 Alisa
 Asuka
@@ -68,7 +68,7 @@ Anna
 Lei
 Marduk
 Armor King
-#Dragonball FighterZ
+#DBFZ
 Android 16
 Android 18
 Android 21
@@ -101,7 +101,7 @@ Goku Base
 Vegeta Base
 Android 17
 Cooler
-#Blazblue: Central Fiction
+#BBCF
 Amane
 Arakune
 Azrael
@@ -138,7 +138,7 @@ Yuuki
 Λ-11
 μ-12
 ν-13
-#SoulCalibur VI
+#SCVI
 Astaroth
 Azwell
 Cervantes
@@ -162,7 +162,7 @@ Xianghua
 Yoshimitsu
 Zasalamel
 2B
-#Street Fighter V
+#SFV
 Birdie
 Cammy
 Chun-Li
@@ -198,7 +198,7 @@ G
 Sagat
 Sakura
 Kage
-#BlazBlue: Cross Tag Battle
+#BBTAG
 Ragna
 Jin
 Noel
@@ -239,7 +239,7 @@ Ruby
 Weiss
 Blake
 Yang
-#Under Night In-Birth Exe:Late[st]
+#UNIST
 Hyde
 Linne
 Waldstein
@@ -260,7 +260,7 @@ Phonon
 Mika
 Wagner
 Enkidu
-#King of Fighters XIV
+#KOFXIV
 Kyo Kusanagi
 Benimaru Nikaido
 Goro Daimon
@@ -319,7 +319,7 @@ Oswald
 Heidern
 Najd
 Blue Mary
-#Marvel vs. Capcom Infinite
+#MvCI
 Arthur
 Black Panther
 Black Widow
@@ -356,7 +356,7 @@ Ultron
 Venom
 Winter Soldier
 Zero
-#Injustice 2
+#IJ2
 Aquaman
 Atom
 Atrocitus
@@ -398,7 +398,7 @@ Supergirl
 Superman
 Swamp Thing
 Wonder Woman
-#Ultimate Marvel vs. Capcom 3
+#UMvC3
 Akuma
 Amaterasu
 Arthur
@@ -449,83 +449,83 @@ Taskmaster
 Thor
 Wolverine
 X-23
-#Mortal Kombat XL
-Cassie Cage - Hollywood
-Cassie Cage - Brawler
-Cassie Cage - Spec Ops
-D’Vorah - Brood Mother
-D’Vorah - Swarm Queen
-D’Vorah - Venomous
-Ermac - Mystic
-Ermac - Spectral
-Ermac - Master of Souls
-Erron Black - Marksman
-Erron Black - Gunslinger
-Erron Black - Outlaw
-Ferra & Torr - Ruthless
-Ferra & Torr - Vicious
-Ferra & Torr - Lackey
-Goro - Dragon Fangs
-Goro - Kuatan Warrior
-Goro - Tigrar Fury
-Jacqui - High Tech
-Jacqui - Shotgun
-Jacqui - Full Auto
-Jax - Pumped Up
-Jax - Heavy Weapons
-Jax - Wrestler
-Johnny Cage - A-List
-Johnny Cage - Fistcuffs
-Johnny Cage - Stunt Double
-Kano - Cybernetic
-Kano - Commando
-Kano - Cutthroat
-Kenshi - Kenjutsu
-Kenshi - Balanced
-Kenshi - Possesed
-Kitana - Mournful
-Kitana - Royal Storm
-Kitana - Assassin
-Kotal Kahn - Blood God
-Kotal Kahn - War God
-Kotal Kahn - Sun God
-Kung Jin - Shaolin
-Kung Jin - Ancestral
-Kung Jin - Bojutsu
-Kung Lao - Buzz Saw
-Kung Lao - Tempest
-Kung Lao - Hat Trick
-Liu Kang - Dragon’s Fire
-Liu Kang - Flame Fist
-Liu Kang - Dualist
-Mileena - Ethereal
-Mileena - Piercing
-Mileena - Ravenous
-Quan Chi - Warlock
-Quan Chi - Summoner
-Quan Chi - Sorcerer
-Raiden - Thunder God
-Raiden - Displacer
-Raiden - Master of Storms
-Reptile - Noxious
-Reptile - Deceptive
-Reptile - Nimble
-Scorpion - Ninjutsu
-Scorpion - Hellfire
-Scorpion - Inferno
-Shinnok - Necromancer
-Shinnok - Imposter
-Shinnok - Bone Shaper
-Sonya Blade - Special Forces
-Sonya Blade - Covert Ops
-Sonya Blade - Demolition
-Sub-Zero - Cryomancer
-Sub-Zero - Unbreakable
-Sub-Zero - Grandmaster
-Takeda - Ronin
-Takeda - Shirai Ryu
-Takeda - Lasher
-#Super Street Fighter II X
+#MKXL
+Cassie Cage (Hollywood)
+Cassie Cage (Brawler)
+Cassie Cage (Spec Ops)
+D’Vorah (Brood Mother)
+D’Vorah (Swarm Queen)
+D’Vorah (Venomous)
+Ermac (Mystic)
+Ermac (Spectral)
+Ermac (Master of Souls)
+Erron Black (Marksman)
+Erron Black (Gunslinger)
+Erron Black (Outlaw)
+Ferra & Torr (Ruthless)
+Ferra & Torr (Vicious)
+Ferra & Torr (Lackey)
+Goro (Dragon Fangs)
+Goro (Kuatan Warrior)
+Goro (Tigrar Fury)
+Jacqui (High Tech)
+Jacqui (Shotgun)
+Jacqui (Full Auto)
+Jax (Pumped Up)
+Jax (Heavy Weapons)
+Jax (Wrestler)
+Johnny Cage (A-List)
+Johnny Cage (Fistcuffs)
+Johnny Cage (Stunt Double)
+Kano (Cybernetic)
+Kano (Commando)
+Kano (Cutthroat)
+Kenshi (Kenjutsu)
+Kenshi (Balanced)
+Kenshi (Possesed)
+Kitana (Mournful)
+Kitana (Royal Storm)
+Kitana (Assassin)
+Kotal Kahn (Blood God)
+Kotal Kahn (War God)
+Kotal Kahn (Sun God)
+Kung Jin (Shaolin)
+Kung Jin (Ancestral)
+Kung Jin (Bojutsu)
+Kung Lao (Buzz Saw)
+Kung Lao (Tempest)
+Kung Lao (Hat Trick)
+Liu Kang (Dragon’s Fire)
+Liu Kang (Flame Fist)
+Liu Kang (Dualist)
+Mileena (Ethereal)
+Mileena (Piercing)
+Mileena (Ravenous)
+Quan Chi (Warlock)
+Quan Chi (Summoner)
+Quan Chi (Sorcerer)
+Raiden (Thunder God)
+Raiden (Displacer)
+Raiden (Master of Storms)
+Reptile (Noxious)
+Reptile (Deceptive)
+Reptile (Nimble)
+Scorpion (Ninjutsu)
+Scorpion (Hellfire)
+Scorpion (Inferno)
+Shinnok (Necromancer)
+Shinnok (Imposter)
+Shinnok (Bone Shaper)
+Sonya Blade (Special Forces)
+Sonya Blade (Covert Ops)
+Sonya Blade (Demolition)
+Sub-Zero (Cryomancer)
+Sub-Zero (Unbreakable)
+Sub-Zero (Grandmaster)
+Takeda (Ronin)
+Takeda (Shirai Ryu)
+Takeda (Lasher)
+#2X
 Boxer
 Blanka
 Cammy
@@ -559,7 +559,7 @@ O.Ryu
 O.Sagat
 O.T.Hawk
 O.Zangief
-#Vampire Savior
+#VSav
 Anakaris
 Aulbath (Rikuo)
 Bishamon
@@ -576,7 +576,7 @@ Q-Bee
 Sasquatch
 Victor
 Zabel (Lord Raptor)
-#Street Fighter III: 3rd Strike
+#SF3.3
 Akuma
 Alex
 Chun-Li

@@ -3,7 +3,7 @@
     <post-form
       :games="allGames"
       :categories="allCategories"/>
-    <div class="columns is-centered post-filters">
+    <div class="columns is-centered post-filters is-multiline">
       <div class="field has-addons column is-narrow">
         <div class="control">
           <div class="button is-static">Title</div>

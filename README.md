@@ -1,22 +1,20 @@
 # FG Vault - [fgvault.net](https://fgvault.net)
 
-## Objectives
+## What is this ?
 
-- Make it easy to archive and find tech
+This is a website made to centralize and store links to fighting games related resources.
 
+## Why did you make it ?
 
-## Requirements
+A lot of resources are scattered in many places (wikis, discords, forums, subreddits, youtube, twitter...) with no convenient way to look for them all at once. The goal of this website is to have a place where people can post resources they create or find to allow others to look for them easily.
 
-- Multi games
-- Easy to use
-- No auth
-- No duplicates
-- Fast
+## How is it made ?
 
-## Stack
+The secondary (might be primary if it goes unused) goal of this website for me was to learn about new technologies and tools. I tried to go for a stack I knew almost nothing about. The Frontend is built with Vue.js and Bulma. The Backend is made with Flask and SQLAlchemy. To connect the two parts, I decided to go for a GraphQL based API. To do that, i'm using Graphene on the server side and Apollo for the client. The database is Graphene and I'm using Docker with Docker Compose to facilitate deployement. I'm also using Fabric to easily run various tasks remotely. 
 
-- Flask/SQLAlchemy/Graphene(GraphQL)/Postgres
-- Vue/Apollo(GraphQL)/Bulma
+## Can I contribute ?
+
+Sure ! The following section should allow you to setup your local development environement. If you need any more help just ask me.
 
 ## Local development setup and usage
 
@@ -56,15 +54,7 @@ Every command here is meant to be run in the `backend` directory
 
 Some of the files in the repository are only meant for deployement (everything related to Fabric and Docker for example).
 
-## TODOS
-
-##### Before release
-
-- Improve README
-- Fix responsiveness with long tags and game/char names
-- Launch
-
-### Docs
+## Docs
 
 - [Vue](https://vuejs.org/v2/api/)
 - [Vue-test-utils](https://vue-test-utils.vuejs.org/)

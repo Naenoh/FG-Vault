@@ -16,12 +16,12 @@
     </div>
     <div class="column is-2-desktop is-6-mobile">
       <a
-        class="tag"
+        class="post-tag"
         @click="filterGame">{{ post.game.name }}</a>
     </div>
     <div class="column is-1-desktop is-4-mobile is-offset-2-mobile">
       <a
-        class="tagg"
+        class="post-tag"
         @click="filterChar">{{ post.char.name }}</a>
     </div>
     <div class="column is-2-desktop is-12-mobile">
@@ -31,7 +31,7 @@
         :key="link.id">
         <a
           target="_blank"
-          class="tag is-link"
+          class="post-tag post-tag-link"
           :href="link.url">{{ formatLink(link.url) }}
         </a>
       </div>
@@ -41,7 +41,7 @@
         <a
           v-for="cat in post.categories"
           :key="cat.id"
-          class="tag"
+          class="post-tag"
           :data-id="cat.id"
           @click="filterCat">
           {{ cat.name }}
@@ -82,7 +82,7 @@ export default {
     },
     toggleDesc: function (evt) {
       const classList = evt.target.classList
-      if (!classList.contains('tag') && !classList.contains('desc')) {
+      if (!classList.contains('post-tag') && !classList.contains('desc')) {
         this.descHidden = !this.descHidden
       }
     }
@@ -111,11 +111,8 @@ export default {
 .post-item:hover {
   background-color: #F5F5F5;
 }
-.tagg {
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  background-color: #dbdbdb;
+.post-tag {
+  background-color: #ececec;
   border-radius: 3px;
   color: #272727;
   display: -webkit-inline-box;
@@ -126,7 +123,20 @@ export default {
   -ms-flex-pack: center;
   justify-content: center;
   line-height: 1.5;
-  padding: .5rem;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+}
+
+.post-tag-link {
+  background-color: #3273dc;
+  color: #fff;
+}
+
+.post-tag-link:hover {
+  color: #fff;
+}
+
+.post-tag:hover {
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 768px){

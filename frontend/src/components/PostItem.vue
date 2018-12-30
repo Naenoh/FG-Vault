@@ -139,7 +139,7 @@ export default {
   text-decoration: underline;
 }
 
-.post-link {
+.post-link:not(:last-child) {
   margin-bottom: 0.25rem;
 }
 

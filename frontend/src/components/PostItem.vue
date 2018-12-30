@@ -139,6 +139,10 @@ export default {
   text-decoration: underline;
 }
 
+.post-link {
+  margin-bottom: 0.25rem;
+}
+
 @media screen and (max-width: 768px){
     .post-item {
       border-top: 2px solid black;

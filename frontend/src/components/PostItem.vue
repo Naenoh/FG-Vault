@@ -124,6 +124,8 @@ export default {
   justify-content: center;
   line-height: 1.5;
   padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  margin-bottom: 0.25rem;
+  margin-right: 0.15rem;
 }
 
 .post-tag-link {
